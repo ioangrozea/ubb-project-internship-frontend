@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginRequest: LoginRequest;
   hide = true;
   public logInForm = new FormGroup({
-    usernameOrEmail: new FormControl('',),
+    username: new FormControl('',),
     password: new FormControl('', [Validators.required]),
   });
 
