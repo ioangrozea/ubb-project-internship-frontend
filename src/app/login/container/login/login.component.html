@@ -1,20 +1,18 @@
-<div class="container">
-  <form [formGroup]="logInForm" fxLayout="column">
-    <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="username">
-      <mat-label>Username</mat-label>
-      <input matInput #input maxlength="10" placeholder="Ex. User">
-      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="fill" id="password">
-      <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <section class="buttons">
-      <button mat-raised-button [disabled]="!logInForm.valid" color="primary" (click)="onSubmit()">Log in</button>
-    </section>
-  </form>
-</div>
+<form [formGroup]="logInForm" class="container">
+  <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="username">
+    <mat-label>Username</mat-label>
+    <input matInput #input maxlength="10" placeholder="Ex. User">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="fill" id="password">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <section class="buttons">
+    <button mat-raised-button color="primary" (click)="onSubmit()">Log in</button>
+  </section>
+</form>
