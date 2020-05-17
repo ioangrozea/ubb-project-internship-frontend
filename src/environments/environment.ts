@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_login_url: "https://elixir-account-service.azurewebsites.net"
+  api_login_url: "https://elixir-account-service.azurewebsites.net",
+  api_profile_url: "https://elixir-profile-service.azurewebsites.net",
 };
 
 /*

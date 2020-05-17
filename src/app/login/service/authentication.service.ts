@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {AuthenticationData} from "../http";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -9,8 +10,8 @@ export class AuthenticationService {
     localStorage.setItem(this.authDataKey, JSON.stringify(data));
   }
 
-  getAuthenticationData() {
-    return localStorage.getItem(this.authDataKey);
+  getAuthenticationData(): AuthenticationData {
+    return JSON.parse(localStorage.getItem(this.authDataKey));
   }
 
   removeAuthenticationData() {

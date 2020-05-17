@@ -20,7 +20,7 @@ export class AuthenticationApiService {
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService) {
     this.authenticationDataSubject = new BehaviorSubject<AuthenticationData>(
-      JSON.parse(this.authenticationService.getAuthenticationData()));
+      this.authenticationService.getAuthenticationData());
     this.authenticationData = this.authenticationDataSubject.asObservable();
   }
 

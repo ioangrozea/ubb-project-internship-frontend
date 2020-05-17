@@ -8,8 +8,11 @@ import {MatButtonModule} from "@angular/material/button";
 import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
+
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
+import * as fromHttpServices from './http';
+import * as fromServices from './service';
 
 @NgModule({
   imports: [
@@ -27,7 +30,10 @@ import * as fromComponents from './components';
     ...fromContainers.components,
     ...fromComponents.components,
   ],
-  providers: [],
+  providers: [
+    ...fromHttpServices.apiServices,
+    ...fromServices.services,
+  ],
 })
 export class ProfileModule {
 }

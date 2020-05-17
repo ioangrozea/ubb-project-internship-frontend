@@ -1,6 +1,8 @@
 <div class="container">
   <div class="item profile-description">
-    <app-profile-description></app-profile-description>
+    <app-profile-description [userProfile$]="profile$">
+
+    </app-profile-description>
     <app-preferences></app-preferences>
     <app-preferences></app-preferences>
   </div>

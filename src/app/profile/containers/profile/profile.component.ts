@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from "../../../login/service";
+import {UserProfile} from "../../model/user-profile";
+import {ProfileApiService} from "../../http";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-profile',
@@ -6,11 +10,13 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  hide = true;
+  profile$: Observable<UserProfile>;
 
-  constructor() {
+  constructor(private profileApiService: ProfileApiService,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
+    this.profile$ = this.profileApiService.getProfile(this.authenticationService.getAuthenticationData().id)
   }
 }
