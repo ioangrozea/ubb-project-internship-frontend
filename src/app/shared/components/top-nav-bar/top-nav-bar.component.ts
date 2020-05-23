@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {BaseComponent} from "../base-component";
+import {AuthenticationApiService} from "../../../login/http";
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -9,42 +10,27 @@ import {BaseComponent} from "../base-component";
 })
 export class TopNavBarComponent extends BaseComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private authenticationApiService: AuthenticationApiService) {
     super();
   }
 
   ngOnInit() {
   }
 
-  logout() {
-    alert('That`s sad, you just logged out');
-  }
-
-  applyFilter() {
-  }
-
   profile() {
-    this.router.navigate(['home']);
+    this.router.navigate(['profile']);
   }
 
-  about() {
-    this.router.navigate(['about']);
+  logOut(){
+    this.authenticationApiService.logout();
   }
 
-  consultation() {
-    this.router.navigate(['in-consultation']);
+  chat() {
+    this.router.navigate(['chat']);
   }
 
-  archive() {
-    this.router.navigate(['archive']);
+  match() {
+    this.router.navigate(['match']);
   }
-
-  members() {
-    this.router.navigate(['users']);
-  }
-
-  login() {
-    this.router.navigate(['authentication/log-in']);
-  }
-
 }

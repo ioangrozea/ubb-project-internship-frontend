@@ -1,15 +1,15 @@
 <mat-form-field class="chip-list">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip
-      *ngFor="let preference of preference"
+      *ngFor="let preference of userPreferences"
       [selectable]="selectable"
       [removable]="removable"
-      (removed)="remove(preference)">
-      {{preference}}
+      (removed)="remove(preference.text)">
+      {{preference.text}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
-      placeholder="Add new preference..."
+      placeholder="Add new option..."
       #preferenceInput
       [formControl]="preferencesCtrl"
       [matAutocomplete]="auto"

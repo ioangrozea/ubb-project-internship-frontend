@@ -5,7 +5,8 @@ import {environment} from "../../../environments/environment";
 import {map} from "rxjs/operators";
 import {UserProfile} from "../model/user-profile";
 import {Observable} from "rxjs";
-import {User} from "stream-chat";
+import {UserPreference} from "../model/user-preference";
+import {UserFeature} from "../model/user-feature";
 
 
 @Injectable({providedIn: 'root'})
@@ -23,5 +24,19 @@ export class ProfileApiService {
       .pipe(
         map((userProfile: UserProfile) =>  userProfile)
       );
+  }
+
+  getPreferences(user_id: number): Observable<UserPreference[]> {
+    const options = {
+      params: new HttpParams().set('profile_id', user_id.toString())
+    };
+    return this.http.get<UserPreference[]>(`${environment.api_profile_url}/profile/preference/get-by-profile`, options);
+  }
+
+  getFeatures(user_id: number): Observable<UserFeature[]> {
+    const options = {
+      params: new HttpParams().set('profile_id', user_id.toString())
+    };
+    return this.http.get<UserFeature[]>(`${environment.api_profile_url}/profile/feature/get-by-profile`, options);
   }
 }

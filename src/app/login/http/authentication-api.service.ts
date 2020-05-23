@@ -5,6 +5,7 @@ import {LoginRequest} from "../model/login-request";
 import {BehaviorSubject, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 import {AuthenticationService} from "../service";
+import {Router} from "@angular/router";
 
 export class AuthenticationData {
   public token: string;
@@ -18,7 +19,8 @@ export class AuthenticationApiService {
   public authenticationData: Observable<AuthenticationData>;
 
   constructor(private http: HttpClient,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private router: Router) {
     this.authenticationDataSubject = new BehaviorSubject<AuthenticationData>(
       this.authenticationService.getAuthenticationData());
     this.authenticationData = this.authenticationDataSubject.asObservable();
@@ -43,5 +45,6 @@ export class AuthenticationApiService {
   logout() {
     this.authenticationService.removeAuthenticationData();
     this.authenticationDataSubject.next(null);
+    this.router.navigate(['login']);
   }
 }

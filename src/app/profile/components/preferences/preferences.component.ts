@@ -1,24 +1,28 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {Observable} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, startWith} from "rxjs/operators";
 import {MatChipInputEvent} from "@angular/material/chips";
+import {UserPreference} from "../../model/user-preference";
+import {UserOption} from "../../model/user-option";
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.css']
 })
-export class PreferencesComponent {
+export class PreferencesComponent implements OnChanges {
+
+  @Input() userPreferences$: Observable<UserOption[]>;
 
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   preferencesCtrl = new FormControl();
   filteredPreferences: Observable<string[]>;
-  preference: string[] = ['Lemon'];
+  userPreferences: UserOption[];
   allPreferences: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   max_length = 6;
   max_word_length = 30;
@@ -35,10 +39,10 @@ export class PreferencesComponent {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    let numberOfCharacters = this.preference.join().length + value.length;
+    let numberOfCharacters = this.userPreferences.map(userPreference => userPreference.text).join().length + value.length;
     // Add our preference
-    if ((value || '').trim() && this.preference.length < this.max_length && numberOfCharacters < this.max_word_length) {
-      this.preference.push(value.trim());
+    if ((value || '').trim() && this.userPreferences.length < this.max_length && numberOfCharacters < this.max_word_length) {
+      this.userPreferences.push(new UserOption(value.trim()));
     }
 
     // Reset the input value
@@ -49,16 +53,16 @@ export class PreferencesComponent {
     this.preferencesCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.preference.indexOf(fruit);
+  remove(preference: string): void {
+    const index = this.userPreferences.findIndex(userPreference => userPreference.text === preference);
 
     if (index >= 0) {
-      this.preference.splice(index, 1);
+      this.userPreferences.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.preference.push(event.option.viewValue);
+    this.userPreferences.push(new UserOption(event.option.viewValue));
     this.preferenceInput.nativeElement.value = '';
     this.preferencesCtrl.setValue(null);
   }
@@ -67,5 +71,15 @@ export class PreferencesComponent {
     const filterValue = value.toLowerCase();
 
     return this.allPreferences.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty("userPreferences$")) {
+      this.userPreferences$.subscribe(userPreferences => {
+        if (userPreferences)
+          return this.userPreferences = userPreferences;
+      })
+    }
   }
 }
