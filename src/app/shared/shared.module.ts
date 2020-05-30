@@ -11,7 +11,6 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {NgbCarouselModule} from "@ng-bootstrap/ng-bootstrap";
-import * as fromHttpServices from "../shared/components/carousel/http";
 
 const modules = [
   CommonModule,
@@ -36,8 +35,6 @@ const modules = [
   exports: [
     ...fromComponents.components,
     modules,
-  ],providers: [
-    ...fromHttpServices.apiServices,
-  ],
+  ]
 })
 export class SharedModule {}

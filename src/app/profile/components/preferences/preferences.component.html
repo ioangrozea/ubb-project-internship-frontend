@@ -1,7 +1,7 @@
 <mat-form-field class="chip-list">
   <mat-chip-list #chipList aria-label="Fruit selection">
     <mat-chip
-      *ngFor="let preference of userPreferences"
+      *ngFor="let preference of userOptions"
       [selectable]="selectable"
       [removable]="removable"
       (removed)="remove(preference.text)">

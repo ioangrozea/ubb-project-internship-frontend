@@ -22,7 +22,5 @@ import {MatButtonModule} from "@angular/material/button";
   declarations: [
     ChatComponent,
   ],
-  providers: [
-  ],
 })
 export class ChatModule {}

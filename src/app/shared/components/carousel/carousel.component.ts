@@ -1,25 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Photo} from "./model/photo";
-import {CarouselApiService} from "./http";
-import {AuthenticationService} from "../../../login/service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
 })
-export class CarouselComponent implements OnInit {
-  images: Photo[];
-
-
-  constructor(private carouselApiService: CarouselApiService,
-              private authenticationService: AuthenticationService) {
-  }
+export class CarouselComponent implements OnInit, OnChanges {
+  @Input() images$: Observable<Photo[]>;
+  images: Photo[]
 
   ngOnInit(): void {
-    this.carouselApiService.getProfilePhotos(this.authenticationService.getAuthenticationData().id).subscribe(images => {
+    this.images$.subscribe(images => {
       if (images)
         this.images = images
     })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.hasOwnProperty("images$")) {
+      this.images$.subscribe(images => {
+        if (images) {
+          this.images = images
+        }
+      })
+    }
+  }
 }

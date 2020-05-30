@@ -3,11 +3,17 @@
     <app-profile-description [userProfile$]="profile$">
 
     </app-profile-description>
-    <app-preferences [userPreferences$]="userPreferences$"></app-preferences>
-    <app-preferences [userPreferences$]="userFeatures$"></app-preferences>
+    <app-preferences [userOptions$]="userPreferences$"
+                     (newOptions)="preferencesToAdd($event)"
+                     (deletedOptions)="preferencesToDelete($event)">
+    </app-preferences>
+    <app-preferences [userOptions$]="userFeatures$"
+                     (newOptions)="featuresToAdd($event)"
+                     (deletedOptions)="featuresToDelete($event)">
+    </app-preferences>
   </div>
 
   <div class="item profile-carousel">
-    <app-carousel></app-carousel>
+    <app-carousel [images$]="userPhotos$"></app-carousel>
   </div>
 </div>

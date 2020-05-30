@@ -1,11 +1,20 @@
-import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {Observable} from "rxjs";
 import {FormControl} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, startWith} from "rxjs/operators";
 import {MatChipInputEvent} from "@angular/material/chips";
-import {UserPreference} from "../../model/user-preference";
 import {UserOption} from "../../model/user-option";
 
 @Component({
@@ -13,16 +22,19 @@ import {UserOption} from "../../model/user-option";
   templateUrl: './preferences.component.html',
   styleUrls: ['./preferences.component.css']
 })
-export class PreferencesComponent implements OnChanges {
+export class PreferencesComponent implements OnChanges, OnDestroy {
 
-  @Input() userPreferences$: Observable<UserOption[]>;
+  @Input() userOptions$: Observable<UserOption[]>;
+  @Output("newOptions") newOptions = new EventEmitter<UserOption[]>();
+  @Output("deletedOptions") deletedOptions = new EventEmitter<UserOption[]>();
 
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   preferencesCtrl = new FormControl();
   filteredPreferences: Observable<string[]>;
-  userPreferences: UserOption[];
+  initialOptions: UserOption[];
+  userOptions: UserOption[];
   allPreferences: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
   max_length = 6;
   max_word_length = 30;
@@ -39,10 +51,10 @@ export class PreferencesComponent implements OnChanges {
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-    let numberOfCharacters = this.userPreferences.map(userPreference => userPreference.text).join().length + value.length;
+    let numberOfCharacters = this.userOptions.map(userPreference => userPreference.text).join().length + value.length;
     // Add our preference
-    if ((value || '').trim() && this.userPreferences.length < this.max_length && numberOfCharacters < this.max_word_length) {
-      this.userPreferences.push(new UserOption(value.trim()));
+    if ((value || '').trim() && this.userOptions.length < this.max_length && numberOfCharacters < this.max_word_length) {
+      this.userOptions.push(new UserOption(value.trim()));
     }
 
     // Reset the input value
@@ -54,15 +66,15 @@ export class PreferencesComponent implements OnChanges {
   }
 
   remove(preference: string): void {
-    const index = this.userPreferences.findIndex(userPreference => userPreference.text === preference);
+    const index = this.userOptions.findIndex(userPreference => userPreference.text === preference);
 
     if (index >= 0) {
-      this.userPreferences.splice(index, 1);
+      this.userOptions.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.userPreferences.push(new UserOption(event.option.viewValue));
+    this.userOptions.push(new UserOption(event.option.viewValue));
     this.preferenceInput.nativeElement.value = '';
     this.preferencesCtrl.setValue(null);
   }
@@ -75,11 +87,20 @@ export class PreferencesComponent implements OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty("userPreferences$")) {
-      this.userPreferences$.subscribe(userPreferences => {
-        if (userPreferences)
-          return this.userPreferences = userPreferences;
+    if (changes.hasOwnProperty("userOptions$")) {
+      this.userOptions$.subscribe(userOptions => {
+        if (userOptions) {
+          this.initialOptions = userOptions;
+          return this.userOptions = userOptions;
+        }
       })
     }
+  }
+
+  ngOnDestroy(): void {
+    let newOptions = this.userOptions.filter(userPreference => !userPreference.id);
+    let deletedOptions =this.initialOptions.filter(userOption => !this.userOptions.includes(userOption))
+    this.newOptions.emit(newOptions);
+    this.deletedOptions.emit(deletedOptions);
   }
 }

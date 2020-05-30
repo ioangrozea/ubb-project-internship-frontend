@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { StreamChat, ChannelData, Message, User } from 'stream-chat';
+import {Component, OnInit} from '@angular/core';
+import {ChannelData, Message, StreamChat, User} from 'stream-chat';
 import axios from 'axios';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent  {
+export class ChatComponent implements OnInit {
 
   channel: ChannelData;
   username = '';
@@ -16,14 +18,14 @@ export class ChatComponent  {
   channelList: ChannelData[];
   chatClient: any;
   currentUser: User;
+  myWebSocket: WebSocketSubject<string>;
 
   async joinChat() {
-    const { username } = this;
+    const {username} = this;
     try {
-      const response = await axios.post('http://localhost:5500/join', {
+      const response = await axios.post('ws://51.124.90.72:8765', {
         username,
       });
-      const { token } = response.data;
       const apiKey = response.data.api_key;
 
       this.chatClient = new StreamChat(apiKey);
@@ -32,8 +34,7 @@ export class ChatComponent  {
         {
           id: username,
           name: username,
-        },
-        token
+        }
       );
 
       const channel = this.chatClient.channel('team', 'talkshop');
@@ -46,9 +47,9 @@ export class ChatComponent  {
 
       const filter = {
         type: 'team',
-        members: { $in: [`${this.currentUser.me.id}`] },
+        members: {$in: [`${this.currentUser.me.id}`]},
       };
-      const sort = { last_message_at: -1 };
+      const sort = {last_message_at: -1};
 
       this.channelList = await this.chatClient.queryChannels(filter, sort, {
         watch: true,
@@ -74,4 +75,17 @@ export class ChatComponent  {
       console.log(err);
     }
   }
+
+  ngOnInit(): void {
+    console.log("before")
+    if (!this.myWebSocket)
+      this.myWebSocket = webSocket('ws://51.124.90.72:8765');
+    this.myWebSocket.asObservable().subscribe(dataFromServer => {
+      console.log("message received from websocketserver")
+      console.log(dataFromServer)
+    });
+    this.myWebSocket.next("1 2");
+    console.log("after")
+  }
+
 }
