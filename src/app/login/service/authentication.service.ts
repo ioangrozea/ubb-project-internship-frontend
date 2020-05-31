@@ -1,16 +1,16 @@
 import {Injectable} from "@angular/core";
-import {AuthenticationData} from "../http";
+import {LocalStorageData} from "../http";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
 
   private authDataKey = 'authenticationData';
 
-  setAuthenticationData(data) {
+  setAuthenticationData(data: LocalStorageData) {
     localStorage.setItem(this.authDataKey, JSON.stringify(data));
   }
 
-  getAuthenticationData(): AuthenticationData {
+  getAuthenticationData(): LocalStorageData {
     return JSON.parse(localStorage.getItem(this.authDataKey));
   }
 

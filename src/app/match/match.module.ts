@@ -10,6 +10,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatchComponent} from "./container/match.component";
 import {ProfileModule} from "../profile/profile.module";
+import * as fromHttpServices from './http';
 
 // modules
 
@@ -30,6 +31,8 @@ import {ProfileModule} from "../profile/profile.module";
   declarations: [
     MatchComponent
   ],
-  providers: [],
+  providers: [
+    ...fromHttpServices.apiServices,
+  ],
 })
 export class MatchModule {}

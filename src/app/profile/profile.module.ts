@@ -12,7 +12,6 @@ import {MatChipsModule} from "@angular/material/chips";
 import * as fromContainers from './containers';
 import * as fromComponents from './components';
 import * as fromHttpServices from './http';
-import * as fromServices from './service';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {HeaderInterceptor} from "../interceptors/header.interceptor";
 import {JwtInterceptor} from "../interceptors/jwt.interceptor";
@@ -48,7 +47,6 @@ export const httpInterceptorProviders = [
   ],
   providers: [
     ...fromHttpServices.apiServices,
-    ...fromServices.services,
     httpInterceptorProviders,
   ],
 })

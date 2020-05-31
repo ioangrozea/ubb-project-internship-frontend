@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profile$ = this.profileApiService.getProfile(this.authenticationService.getAuthenticationData().id)
-    this.userPreferences$ = this.profileApiService.getPreferences(this.authenticationService.getAuthenticationData().id)
+    this.profile$ = this.profileApiService.getProfile(this.authenticationService.getAuthenticationData().accountId)
+    this.userPreferences$ = this.profileApiService.getPreferences(this.authenticationService.getAuthenticationData().profileId)
       .pipe(
         map((userPreferences: UserPreference[]) => userPreferences.map<UserOption>(preference => ({
           text: preference.PreferenceText,
@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
           profileId: preference.ProfileId
         })))
       );
-    this.userFeatures$ = this.profileApiService.getFeatures(this.authenticationService.getAuthenticationData().id)
+    this.userFeatures$ = this.profileApiService.getFeatures(this.authenticationService.getAuthenticationData().profileId)
       .pipe(
         map((userPreferences: UserFeature[]) => userPreferences.map<UserOption>(preference => ({
           text: preference.FeatureText,
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
           profileId: preference.ProfileId
         })))
       );
-    this.userPhotos$ =  this.profileApiService.getProfilePhotos(this.authenticationService.getAuthenticationData().id)
+    this.userPhotos$ =  this.profileApiService.getProfilePhotos(this.authenticationService.getAuthenticationData().profileId)
   }
 
   preferencesToDelete(event: UserOption[]) {

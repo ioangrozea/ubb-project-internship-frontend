@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs";
 import {UserProfile} from "../../model/user-profile";
+import {AuthenticationApiService} from "../../../login/http";
+import {UserOption} from "../../model/user-option";
 
 @Component({
   selector: 'app-profile-description',

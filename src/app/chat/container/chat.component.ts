@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ChannelData, Message, StreamChat, User} from 'stream-chat';
 import axios from 'axios';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
-import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-chat',

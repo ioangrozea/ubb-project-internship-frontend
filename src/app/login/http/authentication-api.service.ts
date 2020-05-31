@@ -10,23 +10,37 @@ import {Router} from "@angular/router";
 export class AuthenticationData {
   public token: string;
   public id: number;
+
+}
+
+export class LocalStorageData {
+  public token: string;
+  public accountId: number;
+  public profileId: number;
+
+
+  constructor(token: string, accountId: number, profileId?: number) {
+    this.token = token;
+    this.accountId = accountId;
+    this.profileId = profileId;
+  }
 }
 
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationApiService {
-  private authenticationDataSubject: BehaviorSubject<AuthenticationData>;
-  public authenticationData: Observable<AuthenticationData>;
+  private authenticationDataSubject: BehaviorSubject<LocalStorageData>;
+  public authenticationData: Observable<LocalStorageData>;
 
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService,
               private router: Router) {
-    this.authenticationDataSubject = new BehaviorSubject<AuthenticationData>(
+    this.authenticationDataSubject = new BehaviorSubject<LocalStorageData>(
       this.authenticationService.getAuthenticationData());
     this.authenticationData = this.authenticationDataSubject.asObservable();
   }
 
-  get authenticationDataValue(): AuthenticationData {
+  get authenticationDataValue(): LocalStorageData {
     return this.authenticationDataSubject.value;
   }
 
@@ -35,8 +49,9 @@ export class AuthenticationApiService {
       .pipe(
         map((auth: AuthenticationData) => {
           if (auth && auth.token) {
-            this.authenticationService.setAuthenticationData(auth);
-            this.authenticationDataSubject.next(auth);
+            let localStorageData = new LocalStorageData(auth.token, auth.id);
+            this.authenticationService.setAuthenticationData(localStorageData);
+            this.authenticationDataSubject.next(localStorageData);
           }
           return auth;
         }));
