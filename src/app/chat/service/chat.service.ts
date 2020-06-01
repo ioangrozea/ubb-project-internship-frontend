@@ -28,7 +28,7 @@ export class ChatService {
     if(photos && photos[0]){
        url = photos[0].Url
     }
-    return new Chanel(profile.Name, match.SecondProfileId, url, match.MatchedContactId)
+    return new Chanel(profile.Name, current_Profile_id, partner, url, match.MatchedContactId)
   }
 
   async getChatContacts(profile_id: number): Promise<Promise<Chanel>[]> {

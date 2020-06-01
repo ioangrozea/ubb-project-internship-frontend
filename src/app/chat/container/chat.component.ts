@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ChannelData, Message, User} from 'stream-chat';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 import {AuthenticationService} from "../../login/service";
-import {Match} from "../../match/model/match";
 import {ProfileApiService} from "../../profile/http";
 import {ChatService} from "../service";
 import {Chanel} from "../model/chanel";
+import {ChatApiService} from "../http";
+import {Message} from "../model/message";
+import {MessageToSend} from "../model/message_to_send";
 
 @Component({
   selector: 'app-chat',
@@ -14,50 +15,33 @@ import {Chanel} from "../model/chanel";
 })
 export class ChatComponent implements OnInit {
 
-  channel: ChannelData;
+  channel: Chanel;
   username = '';
   messages: Message[] = [];
   newMessage = '';
-  channelList: ChannelData[];
-  chatClient: any;
-  currentUser: User;
   myWebSocket: WebSocketSubject<string>;
 
   chancels: Chanel[] = []
-  matches: Match[];
 
   constructor(private authenticationService: AuthenticationService,
               private profileApiService: ProfileApiService,
-              private chatService: ChatService) {
+              private chatService: ChatService,
+              private chatApiService: ChatApiService) {
   }
 
-  async sendMessage() {
-    if (this.newMessage.trim() === '') {
-      return;
-    }
-
-    try {
-      await this.channel.sendMessage({
-        text: this.newMessage,
-      });
-      this.newMessage = '';
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   ngOnInit(): void {
     console.log("before")
     if (!this.myWebSocket)
       this.myWebSocket = webSocket('ws://51.124.90.72:8765');
     this.myWebSocket.asObservable().subscribe(dataFromServer => {
-      console.log("message received from websocketserver")
-      console.log(dataFromServer)
+      this.loadMessages(this.channel)
     });
     this.myWebSocket.next(this.authenticationService.getAuthenticationData().profileId.toString());
     console.log("after")
 
     this.initChanel()
+
     console.log(this.chancels)
   }
 
@@ -65,12 +49,25 @@ export class ChatComponent implements OnInit {
   initChanel() {
     this.chatService.getChatContacts(this.authenticationService.getAuthenticationData().profileId).then(
       chanelPromises => chanelPromises.map(chanelPromise => chanelPromise.then(
-        chanel=> this.chancels.push(chanel)
+        chanel => {
+          this.channel = chanel;
+          return this.chancels.push(chanel);
+        }
       ))
     )
   }
 
   loadMessages(chanel: Chanel) {
-    console.log(chanel)
+    this.channel = chanel;
+    this.chatApiService.getChatMessages(chanel.matchContactId).subscribe(messages => this.messages = messages)
+  }
+
+  sendMessage() {
+    this.chatApiService.sendMessage(new MessageToSend(this.channel.matchContactId, this.newMessage, this.channel.messageOwner, this.channel.messageReceiver))
+      .subscribe(message => {
+        this.loadMessages(this.channel)
+      })
+
+    this.newMessage = "";
   }
 }

@@ -23,8 +23,8 @@
             </div>
           </div>
           <div class="inbox_chat">
-            <div class="channels" *ngFor="let channel of chancels">
-              <div class="chat_list" (click)="loadMessages(channel)">
+            <div class="channels" *ngFor="let channel of chancels" (click)="loadMessages(channel)">
+              <div class="chat_list" >
                 <div class="chat_people">
                   <div class="chat_ib">
                     <h5>
@@ -41,7 +41,7 @@
             <li class="message" *ngFor="let message of messages">
               <div
                 *ngIf="
-                  message.user.id !== currentUser.me.id;
+                  message.MessageOwner !== channel.messageOwner;
                   then incoming_msg;
                   else outgoing_msg
                 "
@@ -56,7 +56,7 @@
                   </div>
                   <div class="received_msg">
                     <div class="received_withd_msg">
-                      <p>{{ message.text }}</p>
+                      <p>{{ message.MessageText }}</p>
                     </div>
                   </div>
                 </div>
@@ -64,7 +64,7 @@
               <ng-template #outgoing_msg>
                 <div class="outgoing_msg">
                   <div class="sent_msg">
-                    <p>{{ message.text }}</p>
+                    <p>{{ message.MessageText }}</p>
                   </div>
                 </div>
               </ng-template>

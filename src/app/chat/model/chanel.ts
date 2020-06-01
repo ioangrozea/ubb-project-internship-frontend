@@ -1,13 +1,15 @@
-export class Chanel{
+export class Chanel {
   name: string;
-  profileId: number;
+  messageOwner: number;
+  messageReceiver: number;
   photo: string;
   matchContactId: number;
 
 
-  constructor(name: string, profileId: number, photo: string, matchContactId: number) {
+  constructor(name: string, messageOwner: number, messageReceiver: number, photo: string, matchContactId: number) {
     this.name = name;
-    this.profileId = profileId;
+    this.messageOwner = messageOwner;
+    this.messageReceiver = messageReceiver;
     this.photo = photo;
     this.matchContactId = matchContactId;
   }
