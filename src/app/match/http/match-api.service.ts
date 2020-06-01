@@ -22,7 +22,7 @@ export class MatchApiService {
     return this.http.post<RecommendedProfile>(`${environment.api_match_url}/match/get-recommendation`, {current_profile_id: user_id})
   }
 
-  likeProfile(like: Like){
-    return this.http.post(`${environment.api_match_url}/match/get-recommendation`, like).subscribe();
+  likeProfile(like: Like) {
+    return this.http.post(`${environment.api_match_url}/match/like`, like).subscribe(() => console.log("mumu"));
   }
 }

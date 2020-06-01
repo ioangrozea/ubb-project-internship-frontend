@@ -6,6 +6,7 @@ import {ProfileApiService} from "../../profile/http";
 import {AuthenticationApiService} from "../../login/http";
 import {RecommendedProfile} from "../model/recommended-profile";
 import {Like} from "../model/like";
+import {AuthenticationService} from "../../login/service";
 
 @Component({
   selector: 'app-preferences',
@@ -18,7 +19,8 @@ export class MatchComponent implements OnInit {
 
   constructor(public matchApiService: MatchApiService,
               public profileApiService: ProfileApiService,
-              public authenticationApiService: AuthenticationApiService) {
+              public authenticationApiService: AuthenticationApiService,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class MatchComponent implements OnInit {
   }
 
   getMatch() {
-    this.matchApiService.getRecommendation(this.authenticationApiService.authenticationDataValue.accountId)
+    this.matchApiService.getRecommendation(this.authenticationService.getAuthenticationData().profileId)
       .subscribe((recommendedProfile: RecommendedProfile) => {
         if (recommendedProfile) {
           this.recommendedProfile = recommendedProfile;
@@ -36,11 +38,12 @@ export class MatchComponent implements OnInit {
   }
 
   like() {
-    this.matchApiService.likeProfile(new Like(this.authenticationApiService.authenticationDataValue.accountId, this.recommendedProfile.ProfileId, true));
-
+    this.matchApiService.likeProfile(new Like(this.authenticationApiService.authenticationDataValue.profileId, this.recommendedProfile.ProfileId, true));
+    this.getMatch();
   }
 
   dislike() {
-    this.matchApiService.likeProfile(new Like(this.authenticationApiService.authenticationDataValue.accountId, this.recommendedProfile.ProfileId, false));
+    this.matchApiService.likeProfile(new Like(this.authenticationApiService.authenticationDataValue.profileId, this.recommendedProfile.ProfileId, false));
+    this.getMatch();
   }
 }

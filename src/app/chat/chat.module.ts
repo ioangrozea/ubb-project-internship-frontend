@@ -6,8 +6,8 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-
-// modules
+import * as fromHttpServices from './http';
+import * as fromServices from './service';
 
 
 @NgModule({
@@ -22,5 +22,9 @@ import {MatButtonModule} from "@angular/material/button";
   declarations: [
     ChatComponent,
   ],
+  providers:[
+    ...fromHttpServices.apiServices,
+    ...fromServices.apiServices,
+  ]
 })
 export class ChatModule {}

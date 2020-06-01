@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ChannelData, Message, StreamChat, User} from 'stream-chat';
-import axios from 'axios';
+import {ChannelData, Message, User} from 'stream-chat';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {AuthenticationService} from "../../login/service";
+import {ChatApiService} from "../http";
+import {Match} from "../../match/model/match";
+import {ProfileApiService} from "../../profile/http";
 
 @Component({
   selector: 'app-chat',
@@ -19,45 +22,12 @@ export class ChatComponent implements OnInit {
   currentUser: User;
   myWebSocket: WebSocketSubject<string>;
 
-  async joinChat() {
-    const {username} = this;
-    try {
-      const response = await axios.post('ws://51.124.90.72:8765', {
-        username,
-      });
-      const apiKey = response.data.api_key;
 
-      this.chatClient = new StreamChat(apiKey);
+  matches: Match[];
 
-      this.currentUser = await this.chatClient.setUser(
-        {
-          id: username,
-          name: username,
-        }
-      );
-
-      const channel = this.chatClient.channel('team', 'talkshop');
-      await channel.watch();
-      this.channel = channel;
-      this.messages = channel.state.messages;
-      this.channel.on('message.new', event => {
-        this.messages = [...this.messages, event.message];
-      });
-
-      const filter = {
-        type: 'team',
-        members: {$in: [`${this.currentUser.me.id}`]},
-      };
-      const sort = {last_message_at: -1};
-
-      this.channelList = await this.chatClient.queryChannels(filter, sort, {
-        watch: true,
-        state: true,
-      });
-    } catch (err) {
-      console.log(err);
-      return;
-    }
+  constructor(private authenticationService: AuthenticationService,
+              private chatApiService: ChatApiService,
+              private profileApiService: ProfileApiService) {
   }
 
   async sendMessage() {
@@ -83,8 +53,19 @@ export class ChatComponent implements OnInit {
       console.log("message received from websocketserver")
       console.log(dataFromServer)
     });
-    this.myWebSocket.next("1 2");
+    this.myWebSocket.next(this.authenticationService.getAuthenticationData().profileId.toString());
     console.log("after")
   }
 
+  initChanel() {
+    this.chatApiService.getChancels(this.authenticationService.getAuthenticationData().profileId).subscribe(matches => {
+      if (matches) {
+        this.matches = matches;
+      }
+    })
+  }
+
+  mapChat(match: Match) {
+    this.profileApiService.getProfilePhotos(match.SecondProfileId)
+  }
 }

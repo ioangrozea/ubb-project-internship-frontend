@@ -3,10 +3,10 @@
     <app-carousel [images$]="photos$"></app-carousel>
   </div>
   <div>
-      <button mat-fab color="primary" (click)="like()">
+      <button mat-fab color="primary" (click)="dislike()">
         <mat-icon>delete</mat-icon>
       </button>
-      <button mat-fab class="reverse" (click)="dislike()">
+      <button mat-fab class="reverse" (click)="like()">
         <mat-icon>favorite</mat-icon>
       </button>
   </div>

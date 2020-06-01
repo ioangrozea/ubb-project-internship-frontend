@@ -41,7 +41,7 @@ export class AuthenticationApiService {
   }
 
   get authenticationDataValue(): LocalStorageData {
-    return this.authenticationDataSubject.value;
+    return this.authenticationService.getAuthenticationData();
   }
 
   login(loginRequest: LoginRequest) {
@@ -50,7 +50,7 @@ export class AuthenticationApiService {
         map((auth: AuthenticationData) => {
           if (auth && auth.token) {
             let localStorageData = new LocalStorageData(auth.token, auth.id);
-            this.authenticationService.setAuthenticationData(localStorageData);
+            // this.authenticationService.setAuthenticationData(localStorageData);
             this.authenticationDataSubject.next(localStorageData);
           }
           return auth;
