@@ -1,5 +1,5 @@
 export class Photo{
-  Url: number;
-  ProfileId: string;
-  PhotoId: string;
+  Url: string;
+  ProfileId: number;
+  PhotoId: number;
 }

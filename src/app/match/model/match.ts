@@ -4,5 +4,5 @@ export class Match {
   MatchedContactId: number;
   MatchDateTime: string;
   FirstProfileLike: boolean;
-  FirstProfileId: boolean;
+  FirstProfileId: number;
 }

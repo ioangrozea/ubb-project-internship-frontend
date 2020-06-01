@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ChannelData, Message, User} from 'stream-chat';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 import {AuthenticationService} from "../../login/service";
-import {ChatApiService} from "../http";
 import {Match} from "../../match/model/match";
 import {ProfileApiService} from "../../profile/http";
+import {ChatService} from "../service";
+import {Chanel} from "../model/chanel";
 
 @Component({
   selector: 'app-chat',
@@ -22,12 +23,12 @@ export class ChatComponent implements OnInit {
   currentUser: User;
   myWebSocket: WebSocketSubject<string>;
 
-
+  chancels: Chanel[] = []
   matches: Match[];
 
   constructor(private authenticationService: AuthenticationService,
-              private chatApiService: ChatApiService,
-              private profileApiService: ProfileApiService) {
+              private profileApiService: ProfileApiService,
+              private chatService: ChatService) {
   }
 
   async sendMessage() {
@@ -55,17 +56,21 @@ export class ChatComponent implements OnInit {
     });
     this.myWebSocket.next(this.authenticationService.getAuthenticationData().profileId.toString());
     console.log("after")
+
+    this.initChanel()
+    console.log(this.chancels)
   }
+
 
   initChanel() {
-    this.chatApiService.getChancels(this.authenticationService.getAuthenticationData().profileId).subscribe(matches => {
-      if (matches) {
-        this.matches = matches;
-      }
-    })
+    this.chatService.getChatContacts(this.authenticationService.getAuthenticationData().profileId).then(
+      chanelPromises => chanelPromises.map(chanelPromise => chanelPromise.then(
+        chanel=> this.chancels.push(chanel)
+      ))
+    )
   }
 
-  mapChat(match: Match) {
-    this.profileApiService.getProfilePhotos(match.SecondProfileId)
+  loadMessages(chanel: Chanel) {
+    console.log(chanel)
   }
 }

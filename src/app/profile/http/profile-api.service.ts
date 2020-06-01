@@ -14,16 +14,20 @@ export class ProfileApiService {
   constructor(private http: HttpClient) {
   }
 
-  getProfile(user_id: number): Observable<UserProfile> {
+  getProfile(account_id: number): Observable<UserProfile> {
     const options = {
-      params: new HttpParams().set('user_id', user_id.toString())
+      params: new HttpParams().set('user_id', account_id.toString())
     };
     return this.http.get<UserProfile>(`${environment.api_profile_url}/profile/get-by-user`, options);
   }
 
-  getPreferences(user_id: number): Observable<UserPreference[]> {
+  getProfileById(profile_id: number): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`${environment.api_profile_url}/profile/${profile_id}`);
+  }
+
+  getPreferences(profileId: number): Observable<UserPreference[]> {
     const options = {
-      params: new HttpParams().set('profile_id', user_id.toString())
+      params: new HttpParams().set('profile_id', profileId.toString())
     };
     return this.http.get<UserPreference[]>(`${environment.api_profile_url}/profile/preference/get-by-profile`, options);
   }
@@ -39,9 +43,9 @@ export class ProfileApiService {
     return this.http.delete(`${environment.api_profile_url}/profile/preference/delete`, options)
   }
 
-  getFeatures(user_id: number): Observable<UserFeature[]> {
+  getFeatures(profileId: number): Observable<UserFeature[]> {
     const options = {
-      params: new HttpParams().set('profile_id', user_id.toString())
+      params: new HttpParams().set('profile_id', profileId.toString())
     };
     return this.http.get<UserFeature[]>(`${environment.api_profile_url}/profile/feature/get-by-profile`, options);
   }
@@ -57,9 +61,9 @@ export class ProfileApiService {
     return this.http.delete(`${environment.api_profile_url}/profile/feature/delete`, options)
   }
 
-  getProfilePhotos(user_id: number): Observable<Photo[]> {
+  getProfilePhotos(profileId: number): Observable<Photo[]> {
     const options = {
-      params: new HttpParams().set('profile_id', user_id.toString())
+      params: new HttpParams().set('profile_id', profileId.toString())
     };
     return this.http.get<Photo[]>(`${environment.api_profile_url}/profile/photo/get-by-profile`, options)
   }
