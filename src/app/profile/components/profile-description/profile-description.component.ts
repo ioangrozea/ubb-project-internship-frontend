@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {UserProfile} from "../../model/user-profile";
-import {AuthenticationApiService} from "../../../login/http";
-import {UserOption} from "../../model/user-option";
+import {Photo} from "../../../shared/components/carousel/model/photo";
 
 @Component({
   selector: 'app-profile-description',
@@ -11,7 +10,9 @@ import {UserOption} from "../../model/user-option";
 })
 export class ProfileDescriptionComponent implements OnInit {
   @Input() userProfile$: Observable<UserProfile>;
+  @Input() photos$: Observable<Photo[]>;
   userProfile: UserProfile;
+  photo: Photo;
 
   constructor() {
   }
@@ -20,6 +21,10 @@ export class ProfileDescriptionComponent implements OnInit {
     this.userProfile$.subscribe(userProfile => {
       if (userProfile)
         this.userProfile = userProfile
+    })
+    this.photos$.subscribe(photos => {
+      if (photos && photos[0])
+        this.photo = photos[0];
     })
   }
 }

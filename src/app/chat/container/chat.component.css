@@ -223,4 +223,5 @@ img {
 
 .message {
   list-style-type: none;
+  margin: 1rem;
 }
