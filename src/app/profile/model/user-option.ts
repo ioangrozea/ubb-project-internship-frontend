@@ -3,7 +3,8 @@ export class UserOption{
   text: string;
   id: number;
 
-  constructor(text: string) {
+  constructor(text: string, profileId: number) {
     this.text = text;
+    this.profileId = profileId;
   }
 }

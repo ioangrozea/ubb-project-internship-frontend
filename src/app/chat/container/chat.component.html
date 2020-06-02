@@ -24,7 +24,7 @@
           </div>
           <div class="inbox_chat">
             <div class="channels" *ngFor="let channel of chancels" (click)="loadMessages(channel)">
-              <div class="chat_list" >
+              <div class="chat_list">
                 <div class="chat_people">
                   <div class="chat_ib">
                     <h5>
@@ -49,10 +49,7 @@
               <ng-template #incoming_msg>
                 <div class="incoming_msg">
                   <div class="incoming_msg_img">
-                    <img
-                      src="https://i.imgur.com/k2PZLZa.png"
-                      alt="User avatar"
-                    />
+                    <img src="{{channel.photo}}">
                   </div>
                   <div class="received_msg">
                     <div class="received_withd_msg">

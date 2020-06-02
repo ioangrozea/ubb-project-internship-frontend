@@ -16,6 +16,7 @@ import {MatAutocomplete, MatAutocompleteSelectedEvent} from "@angular/material/a
 import {map, startWith} from "rxjs/operators";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {UserOption} from "../../model/user-option";
+import {AuthenticationApiService} from "../../../login/http";
 
 @Component({
   selector: 'app-preferences',
@@ -42,7 +43,7 @@ export class PreferencesComponent implements OnChanges, OnDestroy {
   @ViewChild('preferenceInput') preferenceInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor() {
+  constructor(private authenticationApiService: AuthenticationApiService) {
     this.filteredPreferences = this.preferencesCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this._filter(fruit) : this.allPreferences.slice()));
@@ -54,7 +55,7 @@ export class PreferencesComponent implements OnChanges, OnDestroy {
     let numberOfCharacters = this.userOptions.map(userPreference => userPreference.text).join().length + value.length;
     // Add our preference
     if ((value || '').trim() && this.userOptions.length < this.max_length && numberOfCharacters < this.max_word_length) {
-      this.userOptions.push(new UserOption(value.trim()));
+      this.userOptions.push(new UserOption(value.trim(), this.authenticationApiService.authenticationDataValue.profileId));
     }
 
     // Reset the input value
@@ -74,7 +75,7 @@ export class PreferencesComponent implements OnChanges, OnDestroy {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.userOptions.push(new UserOption(event.option.viewValue));
+    this.userOptions.push(new UserOption(event.option.viewValue, this.authenticationApiService.authenticationDataValue.profileId));
     this.preferenceInput.nativeElement.value = '';
     this.preferencesCtrl.setValue(null);
   }
@@ -90,8 +91,8 @@ export class PreferencesComponent implements OnChanges, OnDestroy {
     if (changes.hasOwnProperty("userOptions$")) {
       this.userOptions$.subscribe(userOptions => {
         if (userOptions) {
-          this.initialOptions = userOptions;
-          return this.userOptions = userOptions;
+          this.initialOptions = [...userOptions];
+          this.userOptions = userOptions;
         }
       })
     }

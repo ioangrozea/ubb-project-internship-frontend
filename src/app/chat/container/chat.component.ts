@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 import {AuthenticationService} from "../../login/service";
 import {ProfileApiService} from "../../profile/http";
@@ -13,7 +13,7 @@ import {MessageToSend} from "../model/message_to_send";
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   channel: Chanel;
   username = '';
@@ -69,5 +69,16 @@ export class ChatComponent implements OnInit {
       })
 
     this.newMessage = "";
+  }
+
+  closeConnection() {
+    if (this.myWebSocket) {
+      this.myWebSocket.complete();
+      this.myWebSocket = null;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.closeConnection();
   }
 }

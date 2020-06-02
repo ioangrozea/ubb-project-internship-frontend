@@ -33,14 +33,14 @@ export class ProfileApiService {
   }
 
   addPreference(preference) {
-    return this.http.post(`${environment.api_profile_url}/profile/preference/insert`, preference)
+    return this.http.post(`${environment.api_profile_url}/profile/preference/insert`, preference).subscribe();
   }
 
   deletePreference(id: number) {
     const options = {
       params: new HttpParams().set('id', id.toString())
     };
-    return this.http.delete(`${environment.api_profile_url}/profile/preference/delete`, options)
+    return this.http.delete(`${environment.api_profile_url}/profile/preference/delete`, options).subscribe();
   }
 
   getFeatures(profileId: number): Observable<UserFeature[]> {
@@ -51,14 +51,14 @@ export class ProfileApiService {
   }
 
   addFeature(feature) {
-    return this.http.post(`${environment.api_profile_url}/profile/feature/insert`, feature)
+    return this.http.post(`${environment.api_profile_url}/profile/feature/insert`, feature).subscribe();
   }
 
   deleteFeature(id: number) {
     const options = {
       params: new HttpParams().set('id', id.toString())
     };
-    return this.http.delete(`${environment.api_profile_url}/profile/feature/delete`, options)
+    return this.http.delete(`${environment.api_profile_url}/profile/feature/delete`, options).subscribe();
   }
 
   getProfilePhotos(profileId: number): Observable<Photo[]> {
