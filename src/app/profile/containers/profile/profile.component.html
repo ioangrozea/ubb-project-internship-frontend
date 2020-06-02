@@ -20,13 +20,7 @@
     <app-carousel [images$]="userPhotos$"></app-carousel>
     <div>
       <form (submit)="addImage()" class="example-full-width">
-        <mat-form-field class="example-form-field">
-          <mat-label>Clearable input</mat-label>
-          <input matInput type="text" [(ngModel)]="imageToAdd"  name="something">
-          <button mat-button *ngIf="imageToAdd" matSuffix mat-icon-button aria-label="Clear" (click)="imageToAdd=''">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
+        <input type="text" id="fname" name="fname" [(ngModel)]="imageToAdd"><br><br>
       </form>
     </div>
   </div>
