@@ -3,10 +3,12 @@
     <app-profile-description [userProfile$]="profile$">
 
     </app-profile-description>
+    <p>User preferences: </p>
     <app-preferences [userOptions$]="userPreferences$"
                      (newOptions)="preferencesToAdd($event)"
                      (deletedOptions)="preferencesToDelete($event)">
     </app-preferences>
+    <p>User features: </p>
     <app-preferences [userOptions$]="userFeatures$"
                      (newOptions)="featuresToAdd($event)"
                      (deletedOptions)="featuresToDelete($event)">
