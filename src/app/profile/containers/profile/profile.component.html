@@ -17,11 +17,13 @@
   </div>
 
   <div class="item profile-carousel">
-    <app-carousel [images$]="userPhotos$"></app-carousel>
+    <app-carousel [images$]="userPhotos$"
+                  (currentImage)="currentImage($event)"></app-carousel>
     <div>
       <form (submit)="addImage()" class="example-full-width">
         <input type="text" id="fname" name="fname" [(ngModel)]="imageToAdd"><br><br>
       </form>
     </div>
+    <button (click)="deleteImage()">Mumu</button>
   </div>
 </div>

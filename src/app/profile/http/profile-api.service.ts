@@ -68,10 +68,17 @@ export class ProfileApiService {
     return this.http.get<Photo[]>(`${environment.api_profile_url}/profile/photo/get-by-profile`, options)
   }
 
-  addImage(imageToAdd: string, profile:number) {
+  addImage(imageToAdd: string, profile: number) {
     return this.http.post(`${environment.api_profile_url}/profile/photo/insert`, {
       profile_id: profile,
       url: imageToAdd
     });
+  }
+
+  deleteImage(id: number) {
+    const options = {
+      params: new HttpParams().set('id', id.toString())
+    };
+    return this.http.delete(`${environment.api_profile_url}/profile/photo/delete`, options).subscribe();
   }
 }

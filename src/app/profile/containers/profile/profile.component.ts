@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit {
   profile$: Observable<UserProfile>;
   userPreferences$: Observable<UserOption[]>;
   userFeatures$: Observable<UserOption[]>;
-  userPhotos$: Observable<Photo[]>
+  userPhotos$: Observable<Photo[]>;
+  currentPhoto: Photo;
 
   imageToAdd:string = "";
 
@@ -76,5 +77,13 @@ export class ProfileComponent implements OnInit {
   addImage() {
     this.profileApiService.addImage(this.imageToAdd, this.authenticationService.getAuthenticationData().profileId).subscribe();
     this.imageToAdd = ""
+  }
+
+  currentImage(currentPhoto: Photo) {
+    this.currentPhoto = currentPhoto;
+  }
+
+  deleteImage(){
+    this.profileApiService.deleteImage(this.currentPhoto.PhotoId)
   }
 }
