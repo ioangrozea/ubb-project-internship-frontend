@@ -20,6 +20,8 @@ export class ProfileComponent implements OnInit {
   userFeatures$: Observable<UserOption[]>;
   userPhotos$: Observable<Photo[]>
 
+  imageToAdd:string = "";
+
   constructor(private profileApiService: ProfileApiService,
               private authenticationService: AuthenticationService) {
   }
@@ -69,5 +71,10 @@ export class ProfileComponent implements OnInit {
         text: userOption.text
       }
     }).forEach(obj => this.profileApiService.addFeature(obj))
+  }
+
+  addImage() {
+    this.profileApiService.addImage(this.imageToAdd, this.authenticationService.getAuthenticationData().profileId).subscribe();
+    this.imageToAdd = ""
   }
 }

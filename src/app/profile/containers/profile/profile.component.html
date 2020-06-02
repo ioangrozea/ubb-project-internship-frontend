@@ -18,5 +18,13 @@
 
   <div class="item profile-carousel">
     <app-carousel [images$]="userPhotos$"></app-carousel>
+    <div>
+      <form (submit)="addImage()" class="example-full-width">
+        <mat-form-field>
+          <mat-label>Add a photo</mat-label>
+          <textarea matInput placeholder="{{imageToAdd}}"></textarea>
+        </mat-form-field>
+      </form>
+    </div>
   </div>
 </div>
