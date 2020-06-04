@@ -18,6 +18,7 @@
   max-height: 40%;
   max-width: 40%;
   align-self: center;
+  border-radius: 50%;
 }
 
 .card {

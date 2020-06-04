@@ -26,6 +26,7 @@ export class CarouselComponent implements OnInit, OnChanges {
       this.images$.subscribe(images => {
         if (images) {
           this.images = images
+          this.currentImage.emit(this.images[0]);
         }
       })
     }

@@ -19,11 +19,14 @@
   <div class="item profile-carousel">
     <app-carousel [images$]="userPhotos$"
                   (currentImage)="currentImage($event)"></app-carousel>
-    <div>
-      <form (submit)="addImage()" class="example-full-width">
-        <input type="text" id="fname" name="fname" [(ngModel)]="imageToAdd"><br><br>
-      </form>
+
+    <div class="image-buttons">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Add image</mat-label>
+        <input matInput placeholder="Ex. Pizza" [(ngModel)]="imageToAdd" (keyup.enter) = addImage()>
+      </mat-form-field>
+      <button mat-raised-button (click)="deleteImage()">Delete Image</button>
     </div>
-    <button (click)="deleteImage()">Mumu</button>
   </div>
 </div>
