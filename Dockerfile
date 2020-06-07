@@ -11,3 +11,4 @@ RUN npm run build
 FROM nginx:1.17.1-alpine
 COPY --from=build /usr/src/app/dist/masinavisurilortale /usr/share/nginx/html
 EXPOSE 80
+EXPOSE 2222
