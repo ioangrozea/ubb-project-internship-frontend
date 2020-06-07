@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {UserPreference} from "../model/user-preference";
 import {UserFeature} from "../model/user-feature";
 import {Photo} from "../../shared/components/carousel/model/photo";
+import {AccountRegister, ProfileRegister} from "../model/register";
 
 
 @Injectable({providedIn: 'root'})
@@ -80,5 +81,13 @@ export class ProfileApiService {
       params: new HttpParams().set('id', id.toString())
     };
     return this.http.delete(`${environment.api_profile_url}/profile/photo/delete`, options).subscribe();
+  }
+
+  registerAccount(registerAccount: AccountRegister){
+    return this.http.post(`${environment.api_login_url}/account/register`, registerAccount);
+  }
+
+  registerProfile(registerProfile: ProfileRegister){
+    return this.http.post(`${environment.api_profile_url}/profile/insert`, registerProfile);
   }
 }

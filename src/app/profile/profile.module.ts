@@ -15,6 +15,7 @@ import * as fromHttpServices from './http';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {HeaderInterceptor} from "../interceptors/header.interceptor";
 import {JwtInterceptor} from "../interceptors/jwt.interceptor";
+import {MatSelectModule} from "@angular/material/select";
 
 export const httpInterceptorProviders = [
   {
@@ -30,17 +31,18 @@ export const httpInterceptorProviders = [
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    ProfileRotingModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    NgbCarouselModule,
-    MatAutocompleteModule,
-    MatChipsModule,
-  ],
+    imports: [
+        SharedModule,
+        ProfileRotingModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        NgbCarouselModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatSelectModule,
+    ],
   declarations: [
     ...fromContainers.components,
     ...fromComponents.components,
