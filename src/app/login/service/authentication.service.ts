@@ -12,6 +12,7 @@ export class AuthenticationService {
   private authDataKey = 'authenticationData';
 
   async setAuthenticationData(data: LocalStorageData) {
+    localStorage.setItem(this.authDataKey, JSON.stringify(data));
     let profile = await this.profileApiService.getProfile(data.accountId).toPromise();
     data.profileId = profile.ProfileId;
     localStorage.setItem(this.authDataKey, JSON.stringify(data));
