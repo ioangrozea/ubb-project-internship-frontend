@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {AccountRegister, ProfileRegister} from "../../model/register";
 import {ProfileApiService} from "../../http";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,27 +10,30 @@ import {ProfileApiService} from "../../http";
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
   hide = true;
   accountRegister: AccountRegister;
   profileRegister: ProfileRegister;
 
 
-  constructor(private profileApiService: ProfileApiService) {
+  constructor(private profileApiService: ProfileApiService,
+              private router: Router) {
   }
 
   public registerForm = new FormGroup({
     userName: new FormControl('',),
-    password: new FormControl('', ),
+    password: new FormControl('',),
     profileName: new FormControl('',),
     profileType: new FormControl('',),
     profileDescription: new FormControl('',),
   });
 
   register() {
-    this.profileApiService.registerAccount(this.accountRegister).subscribe((data) =>{
+    this.profileApiService.registerAccount(this.accountRegister).subscribe((data) => {
       this.profileRegister.user_id = data['data'].AccountId;
-      this.profileApiService.registerProfile(this.profileRegister).subscribe();
+      this.profileApiService.registerProfile(this.profileRegister).subscribe(() => {
+        this.router.navigate(['/login']);
+      });
     })
 
   }
