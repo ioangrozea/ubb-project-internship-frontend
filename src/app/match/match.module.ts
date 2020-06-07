@@ -11,9 +11,24 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatchComponent} from "./container/match.component";
 import {ProfileModule} from "../profile/profile.module";
 import * as fromHttpServices from './http';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HeaderInterceptor} from "../interceptors/header.interceptor";
+import {JwtInterceptor} from "../interceptors/jwt.interceptor";
 
 // modules
 
+export const httpInterceptorProviders = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HeaderInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  },
+];
 
 @NgModule({
   imports: [
@@ -33,6 +48,7 @@ import * as fromHttpServices from './http';
   ],
   providers: [
     ...fromHttpServices.apiServices,
+    httpInterceptorProviders,
   ],
 })
 export class MatchModule {}

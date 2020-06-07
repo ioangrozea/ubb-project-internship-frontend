@@ -8,7 +8,22 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import * as fromHttpServices from './http';
 import * as fromServices from './service';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HeaderInterceptor} from "../interceptors/header.interceptor";
+import {JwtInterceptor} from "../interceptors/jwt.interceptor";
 
+export const httpInterceptorProviders = [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HeaderInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true
+  },
+];
 
 @NgModule({
   imports: [
@@ -25,6 +40,7 @@ import * as fromServices from './service';
   providers:[
     ...fromHttpServices.apiServices,
     ...fromServices.apiServices,
+    httpInterceptorProviders,
   ]
 })
 export class ChatModule {}
