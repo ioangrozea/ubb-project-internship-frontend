@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {LocalStorageData} from "../http";
-import {ProfileApiService} from "../../profile/http";
+import {Injectable} from '@angular/core';
+import {LocalStorageData} from '../http';
+import {ProfileApiService} from '../../profile/http';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -12,10 +12,10 @@ export class AuthenticationService {
   private authDataKey = 'authenticationData';
 
   async setAuthenticationData(data: LocalStorageData) {
-    localStorage.setItem(this.authDataKey, JSON.stringify(data));
-    let profile = await this.profileApiService.getProfile(data.accountId).toPromise();
-    data.profileId = profile.ProfileId;
-    localStorage.setItem(this.authDataKey, JSON.stringify(data));
+    /*    localStorage.setItem(this.authDataKey, JSON.stringify(data));
+        let profile = await this.profileApiService.getProfile(data.accountId).toPromise();
+        data.profileId = profile.ProfileId;
+        localStorage.setItem(this.authDataKey, JSON.stringify(data));*/
   }
 
   getAuthenticationData(): LocalStorageData {

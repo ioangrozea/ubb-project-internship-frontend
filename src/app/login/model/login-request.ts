@@ -1,9 +1,9 @@
 export class LoginRequest {
   username: string;
   password: string;
+  userType: UserType;
+}
 
-  fromForm(request: any) {
-    this.username = request.username;
-    this.password = request.password;
-  }
+export enum UserType {
+  ROLE_ADMIN, ROLE_STUDENT, ROLE_COMPANY
 }

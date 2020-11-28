@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationApiService, AuthenticationData, LocalStorageData} from "../../http";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {LoginRequest} from "../../model/login-request";
-import {AuthenticationService} from "../../service";
+import {AuthenticationApiService} from '../../http';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {LoginRequest, UserType} from '../../model/login-request';
+import {AuthenticationService} from '../../service';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +11,13 @@ import {AuthenticationService} from "../../service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  returnUrl: string = "profile"
-  loginRequest: LoginRequest;
+  loginRequest: LoginRequest = new LoginRequest();
   hide = true;
+
   public logInForm = new FormGroup({
-    username: new FormControl('',),
+    username: new FormControl(''),
     password: new FormControl('', [Validators.required]),
+    userType: new FormControl('ROLE_STUDENT'),
   });
 
   constructor(private router: Router,
@@ -30,7 +31,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.logInForm.valueChanges.subscribe((request) => {
       this.loginRequest = new LoginRequest();
-      this.loginRequest.fromForm(request);
+      this.loginRequest.username = request.username;
+      this.loginRequest.password = request.password;
+      this.loginRequest.userType = request.userType;
     });
   }
 
@@ -42,16 +45,23 @@ export class LoginComponent implements OnInit {
       }
     }
 
-    this.authenticationApiService.login(this.loginRequest).subscribe({
-      next: (authData: AuthenticationData) => {
-        let localStorageData = new LocalStorageData(authData.token, authData.id);
-        this.authenticationService.setAuthenticationData(localStorageData).then(() =>
-          this.router.navigate([this.returnUrl]));
-      }
-    });
+    this.authenticationApiService.login(this.loginRequest);
   }
 
   register() {
-    this.router.navigate(['/profile/register']);
+    switch (this.loginRequest.userType) {
+      case UserType.ROLE_STUDENT: {
+        this.router.navigate(['/register/student']);
+        break;
+      }
+      case UserType.ROLE_COMPANY: {
+        this.router.navigate(['/register/company']);
+        break;
+      }
+      default: {
+        this.router.navigate(['/register/student']);
+        break;
+      }
+    }
   }
 }

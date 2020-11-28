@@ -3,18 +3,18 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {SharedModule} from "./shared/shared.module";
-import {NgModule} from "@angular/core";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {HeaderInterceptor} from "./interceptors/header.interceptor";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {SharedModule} from './shared/shared.module';
+import {NgModule} from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HeaderInterceptor} from './interceptors/header.interceptor';
 import * as fromGuards from './guard';
-import {JwtInterceptor} from "./interceptors/jwt.interceptor";
+import {JwtInterceptor} from './interceptors/jwt.interceptor';
 
 export const httpInterceptorProviders = [
   {

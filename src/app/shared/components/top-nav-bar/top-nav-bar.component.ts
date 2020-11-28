@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {BaseComponent} from "../base-component";
-import {AuthenticationApiService} from "../../../login/http";
+import {Router} from '@angular/router';
+import {BaseComponent} from '../base-component';
+import {AuthenticationApiService} from '../../../login/http';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -11,7 +11,7 @@ import {AuthenticationApiService} from "../../../login/http";
 export class TopNavBarComponent extends BaseComponent implements OnInit {
 
   constructor(private router: Router,
-              private authenticationApiService: AuthenticationApiService) {
+              public authenticationApiService: AuthenticationApiService) {
     super();
   }
 

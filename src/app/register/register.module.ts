@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
-import {ProfileRotingModule} from './profile-roting.module';
+import {RegisterRotingModule} from './register-roting.module';
 import {SharedModule} from '../shared/shared.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 
@@ -16,6 +17,8 @@ import {HeaderInterceptor} from '../interceptors/header.interceptor';
 import {JwtInterceptor} from '../interceptors/jwt.interceptor';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {DatePipe} from "@angular/common";
 
 export const httpInterceptorProviders = [
   {
@@ -33,15 +36,17 @@ export const httpInterceptorProviders = [
 @NgModule({
   imports: [
     SharedModule,
-    ProfileRotingModule,
+    RegisterRotingModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    NgbCarouselModule,
     MatAutocompleteModule,
     MatChipsModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatNativeDateModule,
   ],
   declarations: [
     ...fromContainers.components,
@@ -50,7 +55,8 @@ export const httpInterceptorProviders = [
   providers: [
     ...fromHttpServices.apiServices,
     httpInterceptorProviders,
+    DatePipe,
   ],
 })
-export class ProfileModule {
+export class RegisterModule {
 }

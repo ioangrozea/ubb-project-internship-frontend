@@ -17,13 +17,9 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-      },
-      {
-        path: 'match',
-        loadChildren: () => import('./match/match.module').then(m => m.MatchModule)
       }, {
-        path: 'chat',
-        loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule)
+        path: 'register',
+        loadChildren: () => import('./register/register.module').then(m => m.RegisterModule)
       },
     ],
   },

@@ -1,4 +1,8 @@
 <form [formGroup]="logInForm" class="container">
+  <mat-button-toggle-group aria-label="Font Style" class="login_type" name="userType" formControlName="userType">
+    <mat-button-toggle [value]="'ROLE_STUDENT'">Student</mat-button-toggle>
+    <mat-button-toggle [value]="'ROLE_COMPANY'">Company</mat-button-toggle>
+  </mat-button-toggle-group>
   <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="username">
     <mat-label>Username</mat-label>
     <input #username

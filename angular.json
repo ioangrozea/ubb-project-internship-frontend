@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "masinavisurilortale"
+  "defaultProject": "masinavisurilortale",
+  "cli": {
+    "analytics": "8b3dba04-5779-4ac0-86b8-379568bf777b"
+  }
 }

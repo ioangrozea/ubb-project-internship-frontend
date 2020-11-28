@@ -1,28 +1,19 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {LoginRequest} from "../model/login-request";
-import {BehaviorSubject, Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {AuthenticationService} from "../service";
-import {Router} from "@angular/router";
-
-export class AuthenticationData {
-  public token: string;
-  public id: number;
-
-}
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {LoginRequest} from '../model/login-request';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {AuthenticationService} from '../service';
+import {Router} from '@angular/router';
 
 export class LocalStorageData {
   public token: string;
-  public accountId: number;
-  public profileId: number;
+  public accountType: string;
 
-
-  constructor(token: string, accountId: number, profileId?: number) {
+  constructor(token: string, accountType: string) {
     this.token = token;
-    this.accountId = accountId;
-    this.profileId = profileId;
+    this.accountType = accountType;
   }
 }
 
@@ -45,16 +36,7 @@ export class AuthenticationApiService {
   }
 
   login(loginRequest: LoginRequest) {
-    return this.http.post(`${environment.api_login_url}/account/login`, loginRequest)
-      .pipe(
-        map((auth: AuthenticationData) => {
-          if (auth && auth.token) {
-            let localStorageData = new LocalStorageData(auth.token, auth.id);
-            // this.authenticationService.setAuthenticationData(localStorageData);
-            this.authenticationDataSubject.next(localStorageData);
-          }
-          return auth;
-        }));
+    return this.http.post(`${environment.apiUrl}/login`, loginRequest).subscribe();
   }
 
   logout() {

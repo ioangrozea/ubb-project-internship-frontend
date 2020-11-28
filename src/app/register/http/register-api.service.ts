@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Observable} from 'rxjs';
-import {AccountRegister, ProfileRegister} from '../model/register';
+import {StudentRegister} from '../model/register';
 
 
 @Injectable({providedIn: 'root'})
-export class ProfileApiService {
+export class RegisterApiService {
 
   constructor(private http: HttpClient) {
+  }
+
+  addStudent(student: StudentRegister) {
+    return this.http.post(`${environment.apiUrl}/student`, student).subscribe();
   }
 
   /*getProfile(account_id: number): Observable<UserProfile> {
