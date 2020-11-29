@@ -1,28 +1,24 @@
 import {Injectable} from '@angular/core';
-import {LocalStorageData} from '../http';
-import {ProfileApiService} from '../../profile/http';
+import {AuthData} from '../http';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
 
-
-  constructor(private profileApiService: ProfileApiService) {
+  async setAuthenticationData(data: AuthData) {
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('accountType', data.accountType);
   }
 
-  private authDataKey = 'authenticationData';
-
-  async setAuthenticationData(data: LocalStorageData) {
-    /*    localStorage.setItem(this.authDataKey, JSON.stringify(data));
-        let profile = await this.profileApiService.getProfile(data.accountId).toPromise();
-        data.profileId = profile.ProfileId;
-        localStorage.setItem(this.authDataKey, JSON.stringify(data));*/
+  getAuthToken(): string {
+   return  localStorage.getItem('token');
   }
 
-  getAuthenticationData(): LocalStorageData {
-    return JSON.parse(localStorage.getItem(this.authDataKey));
+  getAccountType(): string {
+    return  localStorage.getItem('accountType');
   }
 
   removeAuthenticationData() {
-    localStorage.removeItem(this.authDataKey);
+    localStorage.removeItem('token');
+    localStorage.removeItem('accountType');
   }
 }

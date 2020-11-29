@@ -6,3 +6,10 @@ export class StudentRegister {
   birthdate: string;
   description: string;
 }
+
+export class CompanyRegister {
+  username: string;
+  password: string;
+  name: string;
+  description: string;
+}

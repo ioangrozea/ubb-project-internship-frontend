@@ -49,16 +49,17 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    switch (this.loginRequest.userType) {
-      case UserType.ROLE_STUDENT: {
+    switch (this.loginRequest.userType.toString()) {
+      case 'ROLE_STUDENT': {
         this.router.navigate(['/register/student']);
         break;
       }
-      case UserType.ROLE_COMPANY: {
+      case 'ROLE_COMPANY': {
         this.router.navigate(['/register/company']);
         break;
       }
       default: {
+        console.log(this.loginRequest.userType);
         this.router.navigate(['/register/student']);
         break;
       }

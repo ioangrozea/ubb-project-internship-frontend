@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {StudentRegister} from '../model/register';
+import {CompanyRegister, StudentRegister} from '../model/register';
 
 
 @Injectable({providedIn: 'root'})
@@ -11,7 +11,11 @@ export class RegisterApiService {
   }
 
   addStudent(student: StudentRegister) {
-    return this.http.post(`${environment.apiUrl}/student`, student).subscribe();
+    return this.http.post(`${environment.apiUrl}/student/signup`, student).subscribe();
+  }
+
+  addCompany(company: CompanyRegister) {
+    return this.http.post(`${environment.apiUrl}/company/signup`, company).subscribe();
   }
 
   /*getProfile(account_id: number): Observable<UserProfile> {
