@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthenticationApiService} from '../../../login/http';
 import {AuthenticationService} from '../../../login/service';
 import {StudentRegister} from '../../model/register';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {DatePipe} from '@angular/common';
-import {RegisterApiService} from "../../http";
+import {RegisterApiService} from '../../http';
 
 @Component({
   selector: 'app-student-register',
@@ -28,13 +27,9 @@ export class StudentComponent implements OnInit {
   });
 
   constructor(private router: Router,
-              private authenticationApiService: AuthenticationApiService,
               private authenticationService: AuthenticationService,
               private datePipe: DatePipe,
               private registerApiService: RegisterApiService) {
-    if (authenticationApiService.authenticationDataValue) {
-      this.router.navigate(['/']);
-    }
   }
 
   ngOnInit(): void {

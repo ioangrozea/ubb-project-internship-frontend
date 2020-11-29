@@ -10,7 +10,7 @@ export class AuthenticationGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // not logged in so redirect to login page with the return url
-    if (this.authenticationService.getAuthenticationData()) {
+    if (this.authenticationService.getAuthToken()) {
       return true;
     }
 

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span class="menu-spacer"></span>
-    <div class="container" *ngIf="authenticationApiService.authenticationDataValue">
+    <div class="container" *ngIf="authenticationService.getAuthToken()">
       <a class="item" mat-button (click)="profile()"> Profile </a>
       <a class="item" mat-button (click)="match()"> Match </a>
       <a class="item" mat-button (click)="chat()"> Chat </a>

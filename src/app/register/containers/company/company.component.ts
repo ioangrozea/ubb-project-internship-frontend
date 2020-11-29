@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyRegister, StudentRegister} from '../../model/register';
+import {CompanyRegister} from '../../model/register';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthenticationApiService} from '../../../login/http';
 import {AuthenticationService} from '../../../login/service';
 import {DatePipe} from '@angular/common';
 import {RegisterApiService} from '../../http';
@@ -12,7 +11,7 @@ import {RegisterApiService} from '../../http';
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.css']
 })
-export class CompanyComponent implements OnInit{
+export class CompanyComponent implements OnInit {
   companyRegister: CompanyRegister = new CompanyRegister();
   hide = true;
 
@@ -24,13 +23,9 @@ export class CompanyComponent implements OnInit{
   });
 
   constructor(private router: Router,
-              private authenticationApiService: AuthenticationApiService,
               private authenticationService: AuthenticationService,
               private datePipe: DatePipe,
               private registerApiService: RegisterApiService) {
-    if (authenticationApiService.authenticationDataValue) {
-      this.router.navigate(['/']);
-    }
   }
 
   ngOnInit(): void {

@@ -3,7 +3,6 @@ import {AuthenticationApiService} from '../../http';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginRequest, UserType} from '../../model/login-request';
-import {AuthenticationService} from '../../service';
 
 @Component({
   selector: 'app-login',
@@ -21,11 +20,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private router: Router,
-              private authenticationApiService: AuthenticationApiService,
-              private authenticationService: AuthenticationService) {
-    if (authenticationApiService.authenticationDataValue) {
-      this.router.navigate(['/']);
-    }
+              private authenticationApiService: AuthenticationApiService) {
   }
 
   ngOnInit(): void {
@@ -49,17 +44,16 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    switch (this.loginRequest.userType.toString()) {
-      case 'ROLE_STUDENT': {
+    switch (+this.loginRequest.userType) {
+      case UserType.ROLE_STUDENT: {
         this.router.navigate(['/register/student']);
         break;
       }
-      case 'ROLE_COMPANY': {
+      case UserType.ROLE_COMPANY: {
         this.router.navigate(['/register/company']);
         break;
       }
       default: {
-        console.log(this.loginRequest.userType);
         this.router.navigate(['/register/student']);
         break;
       }
