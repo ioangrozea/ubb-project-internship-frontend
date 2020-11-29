@@ -4,7 +4,6 @@ import {environment} from '../../../environments/environment';
 import {LoginRequest} from '../model/login-request';
 import {AuthenticationService} from '../service';
 import {Router} from '@angular/router';
-import {map} from 'rxjs/operators';
 
 export class AuthData {
   public token: string;
@@ -26,13 +25,10 @@ export class AuthenticationApiService {
   }
 
   login(loginRequest: LoginRequest) {
-    return this.http.post(`${environment.apiUrl}/login`, loginRequest).pipe(
-      map((data: AuthData) => {
-        this.authenticationService.setAuthenticationData(data);
-        // ToDo:Tiha redirect to correct module
-        this.router.navigate(['login']);
-      }),
-    ).subscribe();
+    return this.http.post(`${environment.apiUrl}/login`, loginRequest, {observe: 'response'}).subscribe(res => {
+      this.authenticationService.setAuthenticationData(
+        new AuthData(res.headers.get("authorization").split(' ')[1], loginRequest.userType.toString()));
+    });
   }
 
   logout() {
