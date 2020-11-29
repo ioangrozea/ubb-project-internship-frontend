@@ -28,6 +28,7 @@ export class AuthenticationApiService {
     return this.http.post(`${environment.apiUrl}/login`, loginRequest, {observe: 'response'}).subscribe(res => {
       this.authenticationService.setAuthenticationData(
         new AuthData(res.headers.get("authorization").split(' ')[1], loginRequest.userType.toString()));
+      this.router.navigate(['positions']);
     });
   }
 
