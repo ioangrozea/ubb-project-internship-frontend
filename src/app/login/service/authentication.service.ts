@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthData} from '../http';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {

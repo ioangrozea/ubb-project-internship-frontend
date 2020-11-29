@@ -7,10 +7,12 @@ import {Router} from '@angular/router';
 
 export class AuthData {
   public token: string;
+  public userName: string;
   public accountType: string;
 
-  constructor(token: string, accountType: string) {
+  constructor(token: string, userName: string, accountType: string) {
     this.token = token;
+    this.userName = userName;
     this.accountType = accountType;
   }
 }
@@ -27,7 +29,7 @@ export class AuthenticationApiService {
   login(loginRequest: LoginRequest) {
     return this.http.post(`${environment.apiUrl}/login`, loginRequest, {observe: 'response'}).subscribe(res => {
       this.authenticationService.setAuthenticationData(
-        new AuthData(res.headers.get("authorization").split(' ')[1], loginRequest.userType.toString()));
+        new AuthData(res.headers.get("authorization"), loginRequest.username, loginRequest.userType.toString()));
       this.router.navigate(['positions']);
     });
   }
