@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PositionComponent} from './containers';
+import {PositionListComponent} from './containers';
 import {AuthenticationGuard} from '../guard/authentication.guard';
 
 
@@ -8,7 +8,7 @@ import {AuthenticationGuard} from '../guard/authentication.guard';
 const routes: Routes = [
   {
     path: '',
-    component: PositionComponent,
+    component: PositionListComponent,
     canActivate: [
       AuthenticationGuard,
     ],

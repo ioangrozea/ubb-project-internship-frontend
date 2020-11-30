@@ -15,6 +15,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HeaderInterceptor} from './interceptors/header.interceptor';
 import * as fromGuards from './guard';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatCardModule} from '@angular/material/card';
 
 export const httpInterceptorProviders = [
   {
@@ -43,7 +45,9 @@ export const httpInterceptorProviders = [
     MatIconModule,
     MatButtonModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   providers: [
     ...fromGuards.guards,

@@ -16,6 +16,9 @@ import {HeaderInterceptor} from '../interceptors/header.interceptor';
 import {JwtInterceptor} from '../interceptors/jwt.interceptor';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {FlexModule} from '@angular/flex-layout';
 
 export const httpInterceptorProviders = [
   {
@@ -42,6 +45,9 @@ export const httpInterceptorProviders = [
     MatChipsModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatCardModule,
+    MatGridListModule,
+    FlexModule,
   ],
   declarations: [
     ...fromContainers.components,

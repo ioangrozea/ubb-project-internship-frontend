@@ -1,8 +1,8 @@
-import {PositionComponent} from './profile/position.component';
+import {PositionListComponent} from './position-list/position-list.component';
 
 
 export const components: any[] = [
-  PositionComponent,
+  PositionListComponent,
 ];
 
-export * from './profile/position.component';
+export * from './position-list/position-list.component';
