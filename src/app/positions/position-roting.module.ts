@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {PositionListComponent} from './containers';
 import {AuthenticationGuard} from '../guard/authentication.guard';
 
-
 // pt noob aici faici routing pt toate componentele din container
 const routes: Routes = [
   {
@@ -12,7 +11,7 @@ const routes: Routes = [
     canActivate: [
       AuthenticationGuard,
     ],
-  },
+  }
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {FlexModule} from '@angular/flex-layout';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 export const httpInterceptorProviders = [
   {
@@ -48,6 +49,7 @@ export const httpInterceptorProviders = [
     MatCardModule,
     MatGridListModule,
     FlexModule,
+    MatExpansionModule,
   ],
   declarations: [
     ...fromContainers.components,

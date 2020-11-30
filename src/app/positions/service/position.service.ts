@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {PositionApiService} from '../http';
 import {Position} from '../model/position';
 import {Observable} from 'rxjs';
+import {PositionDetails} from '../model/position-details';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ import {Observable} from 'rxjs';
 export class PositionService {
 
   constructor(private positionApiService: PositionApiService) {
+  }
+
+  getPositionWithId(id: number): Observable<PositionDetails> {
+    return this.positionApiService.getPositionDetailsById(id);
   }
 
   getPositionList(): Observable<Array<Position>> {

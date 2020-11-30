@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Position} from '../../model/position';
 import {PositionService} from '../../service/position.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,7 @@ export class PositionListComponent implements OnInit {
   // pt noob aici pui orice componenta care are url
   positionList: Array<Position>;
 
-  constructor(private positionService: PositionService) {
+  constructor(private positionService: PositionService, private router: Router) {
   }
 
   ngOnInit() {
@@ -30,4 +31,5 @@ export class PositionListComponent implements OnInit {
       error => console.log(JSON.stringify(error)));
     console.log('service called');
   }
+
 }

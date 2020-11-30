@@ -4,5 +4,8 @@ export class Position {
   numberOfPositions: string;
   keywords: string;
   createdAt: Date;
-  companyName;
+  companyName: string;
+  description: string;
+  email: string;
+  url: string;
 }

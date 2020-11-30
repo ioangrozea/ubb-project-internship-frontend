@@ -11,3 +11,7 @@
   position: absolute;
   right: 5px;
 }
+
+.description {
+  white-space: pre-line;
+}
