@@ -15,9 +15,11 @@ export class PositionApiService {
     return this.http.get<PositionDetails>(`${environment.apiUrl}/position/${positionId}`);
   }
 
-  getPositions(): Observable<Array<Position>> {
+  getStudentPositions(): Observable<Array<Position>> {
     return this.http.get<Array<Position>>(`${environment.apiUrl}/position`);
   }
 
-
+  getCompanyPositions(companyId: number): Observable<Array<Position>> {
+    return this.http.get<Array<Position>>(`${environment.apiUrl}/position/company/${companyId}`);
+  }
 }

@@ -22,6 +22,10 @@ export class AuthenticationService {
     return localStorage.getItem('accountType');
   }
 
+  getAccountId(): number {
+    return Number(localStorage.getItem('userId'));
+  }
+
   removeAuthenticationData() {
     localStorage.removeItem('token');
     localStorage.removeItem('accountType');

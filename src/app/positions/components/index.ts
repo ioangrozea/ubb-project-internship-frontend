@@ -1,4 +1,5 @@
-// pt noob in directorul asta folosesti ng generate component ca sa iti faci componente care injectezi in container
+import {PositionComponent} from './postion/position.component';
 
 export const components: any[] = [
+  PositionComponent
 ];

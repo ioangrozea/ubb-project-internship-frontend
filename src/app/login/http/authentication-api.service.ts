@@ -35,7 +35,11 @@ export class AuthenticationApiService {
       const userId = this.getDecodedAccessToken(authorizationHeader.split(' ')[1]).userId;
       this.authenticationService.setAuthenticationData(
         new AuthData(authorizationHeader, loginRequest.username, loginRequest.userType.toString(), userId));
-      this.router.navigate(['positions']);
+      if (loginRequest.userType.toString() === 'ROLE_COMPANY') {
+        this.router.navigate(['positions/company']);
+      } else {
+        this.router.navigate(['positions/student']);
+      }
     });
   }
 

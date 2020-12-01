@@ -1,7 +1,9 @@
-import {PositionListComponent} from './position-list/position-list.component';
+import {StudentPositionsComponent} from './student-positions/student-positions.component';
+import {CompanyPositionsComponent} from './company-positions/company-positions.component';
 
 export const components: any[] = [
-  PositionListComponent
+  StudentPositionsComponent,
+  CompanyPositionsComponent,
 ];
 
-export * from './position-list/position-list.component';
+export * from './student-positions/student-positions.component';

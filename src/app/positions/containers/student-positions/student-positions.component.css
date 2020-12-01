@@ -1,0 +1,17 @@
+.content {
+  padding: 16px;
+}
+
+.tile1 {
+  position: absolute;
+  left: 16px;
+}
+
+.tile2 {
+  position: absolute;
+  right: 5px;
+}
+
+.description {
+  white-space: pre-line;
+}

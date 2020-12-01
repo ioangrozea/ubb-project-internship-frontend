@@ -1,13 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PositionListComponent} from './containers';
+import {StudentPositionsComponent} from './containers';
 import {AuthenticationGuard} from '../guard/authentication.guard';
+import {CompanyPositionsComponent} from './containers/company-positions/company-positions.component';
 
-// pt noob aici faici routing pt toate componentele din container
 const routes: Routes = [
   {
-    path: '',
-    component: PositionListComponent,
+    path: 'student',
+    component: StudentPositionsComponent,
+    canActivate: [
+      AuthenticationGuard,
+    ],
+  }, {
+    path: 'company',
+    component: CompanyPositionsComponent,
     canActivate: [
       AuthenticationGuard,
     ],

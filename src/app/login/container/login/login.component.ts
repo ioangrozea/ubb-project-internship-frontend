@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationApiService} from '../../http';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoginRequest, UserType} from '../../model/login-request';
+import {LoginRequest} from '../../model/login-request';
 
 @Component({
   selector: 'app-login',
@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    switch (+this.loginRequest.userType) {
-      case UserType.ROLE_STUDENT: {
+    switch (this.loginRequest.userType.toString()) {
+      case 'ROLE_STUDENT': {
         this.router.navigate(['/register/student']);
         break;
       }
-      case UserType.ROLE_COMPANY: {
+      case 'ROLE_COMPANY': {
         this.router.navigate(['/register/company']);
         break;
       }
