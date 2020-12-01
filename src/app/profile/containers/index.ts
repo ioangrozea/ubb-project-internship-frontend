@@ -1,8 +1,10 @@
-import {ProfileComponent} from './profile/profile.component';
+import {CompanyProfileComponent} from './comapny-profile/company-profile.component';
+import {StudentProfileComponent} from './student-profile/student-profile.component';
 
 
 export const components: any[] = [
-  ProfileComponent,
+  CompanyProfileComponent,
+  StudentProfileComponent
 ];
 
-export * from './profile/profile.component';
+export * from './comapny-profile/company-profile.component';

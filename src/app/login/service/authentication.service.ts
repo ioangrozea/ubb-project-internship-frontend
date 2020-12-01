@@ -11,6 +11,7 @@ export class AuthenticationService {
   setAuthenticationData(data: AuthData) {
     localStorage.setItem('token', data.token);
     localStorage.setItem('accountType', data.accountType);
+    localStorage.setItem('userId', String(data.userId));
   }
 
   getAuthToken(): string {
@@ -24,6 +25,7 @@ export class AuthenticationService {
   removeAuthenticationData() {
     localStorage.removeItem('token');
     localStorage.removeItem('accountType');
+    localStorage.removeItem('userId');
   }
 
   logOut() {

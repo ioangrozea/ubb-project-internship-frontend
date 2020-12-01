@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {BaseComponent} from '../base-component';
 import {AuthenticationService} from '../../../login/service';
+import {UserType} from '../../../login/model/login-request';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -18,19 +19,22 @@ export class TopNavBarComponent extends BaseComponent implements OnInit {
   ngOnInit() {
   }
 
-  profile() {
-    this.router.navigate(['profile']);
+  positions() {
+    this.router.navigate(['positions']);
   }
 
   logOut(){
     this.authenticationService.logOut();
   }
 
-  chat() {
-    this.router.navigate(['chat']);
-  }
-
-  match() {
-    this.router.navigate(['match']);
+  profile() {
+    switch (+UserType[localStorage.getItem('accountType')]) {
+      case UserType.ROLE_STUDENT:
+        this.router.navigate(['profile/student']);
+        break;
+      case UserType.ROLE_COMPANY:
+        this.router.navigate(['profile/company']);
+        break;
+    }
   }
 }

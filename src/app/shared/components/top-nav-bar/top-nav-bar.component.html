@@ -1,10 +1,8 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span class="menu-spacer"></span>
+<mat-toolbar color="primary" class="align-items-center">
+  <mat-toolbar-row class="w-50" style="min-width: 350px">
     <div class="container" *ngIf="authenticationService.getAuthToken()">
+      <a class="item" mat-button (click)="positions()"> Positions </a>
       <a class="item" mat-button (click)="profile()"> Profile </a>
-      <a class="item" mat-button (click)="match()"> Match </a>
-      <a class="item" mat-button (click)="chat()"> Chat </a>
       <a class="item" mat-button (click)="logOut()"> Log Out </a>
     </div>
   </mat-toolbar-row>
