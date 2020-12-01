@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   margin-top: 5rem;
-  overflow-y: scroll;
 }
 
 .buttons{
