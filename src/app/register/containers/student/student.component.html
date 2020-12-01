@@ -1,57 +1,59 @@
-<form [formGroup]="registerForm" class="container">
-  <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="firstName">
-    <mat-label>First name</mat-label>
-    <input #firstName
-           matInput
-           name="firstName"
-           required
-           formControlName="firstName"
-           maxlength="10">
-    <mat-hint align="end">{{firstName.value?.length || 0}}/10</mat-hint>
-  </mat-form-field>
-  <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="lastName">
-    <mat-label>Last name</mat-label>
-    <input #lastName
-           matInput
-           name="lastName"
-           required
-           formControlName="lastName"
-           maxlength="10">
-    <mat-hint align="end">{{lastName.value?.length || 0}}/10</mat-hint>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Birthdate</mat-label>
-    <input matInput [matDatepicker]="birthdate" formControlName="birthdate"  data-date-format='YYYY-MM-DD'>
-    <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
-    <mat-datepicker #birthdate></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="username">
-    <mat-label>Username</mat-label>
-    <input #username
-           matInput
-           name="username"
-           required
-           formControlName="username"
-           maxlength="10" placeholder="Ex. User">
-    <mat-hint align="end">{{username.value?.length || 0}}/10</mat-hint>
-  </mat-form-field>
-  <mat-form-field appearance="fill" id="password">
-    <mat-label>Enter your password</mat-label>
-    <input #password
-           name="password"
-           required
-           formControlName="password"
-           matInput [type]="hide ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>My description</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-  </mat-form-field>
-  <section class="buttons">
-    <button [disabled]="registerForm.invalid" mat-raised-button color="primary" (click)="register()">Register</button>
-  </section>
+<form [formGroup]="registerForm" >
+  <cdk-virtual-scroll-viewport [itemSize]="310" [style.height.px]=310*7 class="container">
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="firstName">
+      <mat-label>First name</mat-label>
+      <input #firstName
+             matInput
+             name="firstName"
+             required
+             formControlName="firstName"
+             maxlength="10">
+      <mat-hint align="end">{{firstName.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="lastName">
+      <mat-label>Last name</mat-label>
+      <input #lastName
+             matInput
+             name="lastName"
+             required
+             formControlName="lastName"
+             maxlength="10">
+      <mat-hint align="end">{{lastName.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Birthdate</mat-label>
+      <input matInput [matDatepicker]="birthdate" formControlName="birthdate" data-date-format='YYYY-MM-DD'>
+      <mat-datepicker-toggle matSuffix [for]="birthdate"></mat-datepicker-toggle>
+      <mat-datepicker #birthdate></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill" id="username">
+      <mat-label>Username</mat-label>
+      <input #username
+             matInput
+             name="username"
+             required
+             formControlName="username"
+             maxlength="10" placeholder="Ex. User">
+      <mat-hint align="end">{{username.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="fill" id="password">
+      <mat-label>Enter your password</mat-label>
+      <input #password
+             name="password"
+             required
+             formControlName="password"
+             matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>My description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <section class="buttons">
+      <button [disabled]="registerForm.invalid" mat-raised-button color="primary" (click)="register()">Register</button>
+    </section>
+  </cdk-virtual-scroll-viewport>
 </form>

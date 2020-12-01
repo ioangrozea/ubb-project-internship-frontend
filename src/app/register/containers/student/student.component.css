@@ -4,7 +4,11 @@
   margin-top: 5rem;
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.mat-form-field {
+  width: 100%;
 }

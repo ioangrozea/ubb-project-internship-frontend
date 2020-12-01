@@ -47,6 +47,6 @@ export class CompanyComponent implements OnInit {
   }
 
   public register() {
-    this.registerApiService.addCompany(this.companyRegister);
+    this.registerApiService.addCompany(this.companyRegister).subscribe(() => this.router.navigate(['login']));
   }
 }

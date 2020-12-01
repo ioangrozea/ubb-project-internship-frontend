@@ -19,6 +19,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {DatePipe} from "@angular/common";
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 export const httpInterceptorProviders = [
   {
@@ -34,20 +35,21 @@ export const httpInterceptorProviders = [
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    RegisterRotingModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatButtonModule,
-    NgbCarouselModule,
-    MatAutocompleteModule,
-    MatChipsModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+    imports: [
+        SharedModule,
+        RegisterRotingModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        NgbCarouselModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ScrollingModule,
+    ],
   declarations: [
     ...fromContainers.components,
     ...fromComponents.components,

@@ -53,6 +53,6 @@ export class StudentComponent implements OnInit {
   }
 
   public register() {
-    this.registerApiService.addStudent(this.studentRegister);
+    this.registerApiService.addStudent(this.studentRegister).subscribe(() => this.router.navigate(['login']));
   }
 }
