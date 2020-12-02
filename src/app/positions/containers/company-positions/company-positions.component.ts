@@ -23,4 +23,11 @@ export class CompanyPositionsComponent implements OnInit {
       },
       error => console.log(JSON.stringify(error)));
   }
+
+  deleteComponent(position: Position) {
+    const index: number = this.positionList.indexOf(position);
+    if (index !== -1) {
+      this.positionList.splice(index, 1);
+    }
+  }
 }

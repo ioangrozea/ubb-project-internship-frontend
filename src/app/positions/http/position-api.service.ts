@@ -22,4 +22,8 @@ export class PositionApiService {
   getCompanyPositions(companyId: number): Observable<Array<Position>> {
     return this.http.get<Array<Position>>(`${environment.apiUrl}/position/company/${companyId}`);
   }
+
+  deletePosition(positionId: number) {
+    return this.http.delete(`${environment.apiUrl}/position/${positionId}`);
+  }
 }

@@ -24,4 +24,11 @@ export class PositionService {
     return this.positionApiService.getCompanyPositions(companyId);
   }
 
+  deletePortion(positionId: number) {
+    return this.positionApiService.deletePosition(positionId);
+  }
+
+  editPosition(position: Position) {
+    return null;
+  }
 }
