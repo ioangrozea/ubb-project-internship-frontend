@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationApiService} from '../../http';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoginRequest} from '../../model/login-request';
+import {LoginRequest, UserType} from '../../model/login-request';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginRequest.userType = UserType.ROLE_STUDENT;
     this.logInForm.valueChanges.subscribe((request) => {
       this.loginRequest = new LoginRequest();
       this.loginRequest.username = request.username;

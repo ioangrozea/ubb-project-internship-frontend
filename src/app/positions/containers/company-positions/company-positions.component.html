@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="content" fxLayout="column wrap" fxLayoutGap="16px grid">
+  <div class="content" fxLayoutGap="16px grid">
     <div id="{{position.id}}" *ngFor="let position of positionList">
       <app-portion [position]="position"
                    [isEditable]="true"
