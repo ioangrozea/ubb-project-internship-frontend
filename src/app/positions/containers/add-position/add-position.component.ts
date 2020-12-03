@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PositionService} from '../../service/position.service';
@@ -6,13 +6,12 @@ import {Position} from '../../model/position';
 import {EditService} from '../../service/edit.service';
 
 @Component({
-  selector: 'app-edit-position',
-  templateUrl: './edit-position.component.html',
-  styleUrls: ['./edit-position.component.css']
+  selector: 'app-add-position',
+  templateUrl: './add-position.component.html',
+  styleUrls: ['./add-position.component.css']
 })
-export class EditPositionComponent implements OnInit{
-  position: Position;
-  hide = true;
+export class AddPositionComponent implements OnInit {
+  position: Position = new Position();
 
   public registerForm = new FormGroup({
     title: new FormControl(''),
@@ -28,14 +27,6 @@ export class EditPositionComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.position = this.editService.getPosition();
-    this.registerForm.setValue({
-      title: this.position.title,
-      description: this.position.description,
-      numberOfPositions: this.position.numberOfPositions,
-      email: this.position.email,
-      url: this.position.url,
-    });
     this.registerForm.valueChanges.subscribe((request) => {
       this.position.title = request.title;
       this.position.description = request.description;
@@ -55,6 +46,6 @@ export class EditPositionComponent implements OnInit{
   }
 
   public save() {
-    this.positionService.editPosition(this.position).subscribe(() => this.router.navigate(['positions/company']));
+    this.positionService.addPosition(this.position).subscribe(() => this.router.navigate(['positions/company']));
   }
 }

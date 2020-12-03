@@ -3,13 +3,15 @@ import {PositionApiService} from '../http';
 import {Position} from '../model/position';
 import {Observable} from 'rxjs';
 import {PositionDetails} from '../model/position-details';
+import {AuthenticationService} from '../../login/service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PositionService {
 
-  constructor(private positionApiService: PositionApiService) {
+  constructor(private positionApiService: PositionApiService,
+              private authenticationService: AuthenticationService) {
   }
 
   getPositionWithId(id: number): Observable<PositionDetails> {
@@ -29,6 +31,11 @@ export class PositionService {
   }
 
   editPosition(position: Position) {
-    return null;
+    return this.positionApiService.editPosition(position);
+  }
+
+  addPosition(position: Position) {
+    position.companyId = this.authenticationService.getAccountId();
+    return this.positionApiService.addPosition(position);
   }
 }

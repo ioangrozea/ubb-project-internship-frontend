@@ -26,4 +26,12 @@ export class PositionApiService {
   deletePosition(positionId: number) {
     return this.http.delete(`${environment.apiUrl}/position/${positionId}`);
   }
+
+  editPosition(position: Position) {
+    return this.http.put(`${environment.apiUrl}/position/${position.id}`, position);
+  }
+
+  addPosition(position: Position) {
+    return this.http.post(`${environment.apiUrl}/position`, position);
+  }
 }

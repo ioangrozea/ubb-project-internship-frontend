@@ -5,6 +5,7 @@ export class Position {
   keywords: string;
   createdAt: Date;
   companyName: string;
+  companyId: number;
   description: string;
   email: string;
   url: string;
