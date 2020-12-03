@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Student} from '../model/student';
-import {PositionDetails} from '../../positions/model/position-details';
+import {Company} from '../model/company';
 
 
 @Injectable({providedIn: 'root'})
@@ -21,6 +21,18 @@ export class ProfileApiService {
   }
 
   deleteStudent(studentId: number): Observable<any>{
-    return this.http.delete(`${environment.apiUrl}/student/${studentId}`);
+    return this.http.delete<any>(`${environment.apiUrl}/student/${studentId}`);
+  }
+
+  getCompanyById(companyId: number): Observable<Company> {
+    return this.http.get<Company>(`${environment.apiUrl}/company/${companyId}`);
+  }
+
+  updateCompany(companyId: number, company: Company): Observable<Company> {
+    return this.http.put<Company>(`${environment.apiUrl}/company/${companyId}`, company);
+  }
+
+  deleteCompany(companyId: number): Observable<any>{
+    return this.http.delete<any>(`${environment.apiUrl}/company/${companyId}`);
   }
 }

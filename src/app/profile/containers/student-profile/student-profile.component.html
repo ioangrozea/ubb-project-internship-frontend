@@ -1,41 +1,66 @@
 <div class="container">
   <div class="my-form">
-    <h2>Hello {{student.firstName}} {{student.lastName}}</h2>
+    <h2>Hello {{initialFirstName}} {{initialLastName}}</h2>
     <h4>Submitted profile details:</h4>
     <mat-card-content>
-      <form [formGroup]="registerForm">
+      <form [formGroup]="studentFormGroup">
         <mat-form-field class="full-width">
           <mat-label>First name</mat-label>
-          <input matInput formControlName="firstName" [readonly]="isReadonly">
+          <input matInput formControlName="firstName">
         </mat-form-field>
         <mat-form-field class="full-width">
           <mat-label>Last Name</mat-label>
-          <input matInput formControlName="lastName" [readonly]="isReadonly">
+          <input matInput formControlName="lastName">
         </mat-form-field>
         <mat-form-field class="full-width">
           <mat-label>Username</mat-label>
-          <input matInput formControlName="username" [readonly]="isReadonly">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" type="password" [readonly]="isReadonly">
+          <input matInput formControlName="username">
         </mat-form-field>
       </form>
     </mat-card-content>
     <mat-grid-list cols="3">
       <mat-grid-tile [colspan]="1">
         <mat-card-actions style="width: 82px">
-          <button mat-raised-button (click)="update()" color="primary">SAVE</button>
+          <button mat-raised-button (click)="update()" color="primary" [disabled]="!studentFormGroup.valid">SAVE
+          </button>
         </mat-card-actions>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1">
-        <mat-card-actions style="width: 82px">
-          <button mat-raised-button (click)="edit()" color="primary">EDIT</button>
-        </mat-card-actions>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1">
         <mat-card-actions style="width: 82px">
           <button mat-raised-button (click)="delete()" color="primary">DELETE</button>
+        </mat-card-actions>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
+<div class="container">
+  <div class="my-form">
+    <h4>Update password</h4>
+    <mat-card-content>
+      <form [formGroup]="passwordFormGroup">
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password"
+                 (input)="onPasswordInput()">
+          <mat-error *ngIf="password.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="password.hasError('minlength')">Password must have at least {{minPw}} characters</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Confirm password</mat-label>
+          <input matInput formControlName="password2" type="password"
+                 (input)="onPasswordInput()">
+          <mat-error *ngIf="password2.hasError('required')">Please confirm your password</mat-error>
+          <mat-error *ngIf="password2.invalid && !password2.hasError('required')">Passwords don't match</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-grid-list cols="3">
+      <mat-grid-tile [colspan]="1">
+        <mat-card-actions style="width: 82px">
+          <button mat-raised-button (click)="updatePassword()" color="primary" [disabled]="!passwordFormGroup.valid">SAVE
+          </button>
         </mat-card-actions>
       </mat-grid-tile>
     </mat-grid-list>
