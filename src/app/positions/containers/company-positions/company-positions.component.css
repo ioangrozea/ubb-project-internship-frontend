@@ -19,3 +19,11 @@
 .description {
   white-space: pre-line;
 }
+
+.btm {
+  margin-top: 16px;
+}
+
+.container {
+  margin-top: 16px;
+}
