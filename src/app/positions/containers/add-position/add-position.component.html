@@ -1,41 +1,43 @@
-<form [formGroup]="registerForm" class="container">
-  <mat-form-field appearance="fill" id="title">
-    <mat-label>Position title</mat-label>
-    <input matInput
-           name="title"
-           required
-           formControlName="title">
-  </mat-form-field>
-  <mat-form-field appearance="fill" id="description">
-    <mat-label>Position description</mat-label>
-    <input matInput
-           name="description"
-           required
-           formControlName="description">
-  </mat-form-field>
-  <mat-form-field appearance="fill" id="numberOfPositions">
-    <mat-label>Available positions</mat-label>
-    <input matInput
-           type="number"
-           name="numberOfPositions"
-           required
-           formControlName="numberOfPositions">
-  </mat-form-field>
-  <mat-form-field appearance="fill" id="email">
-    <mat-label>Email</mat-label>
-    <input matInput
-           name="email"
-           required
-           formControlName="email">
-  </mat-form-field>
-  <mat-form-field appearance="fill" id="url">
-    <mat-label>Url</mat-label>
-    <input matInput
-           name="url"
-           required
-           formControlName="url">
-  </mat-form-field>
-  <section >
-    <button [disabled]="registerForm.invalid" mat-raised-button color="primary" (click)="save()">Save</button>
-  </section>
-</form>
+<mat-card-content>
+  <form [formGroup]="registerForm" class="container">
+    <h2>Add new position</h2>
+    <mat-form-field appearance="fill" id="title">
+      <mat-label>Position title</mat-label>
+      <input matInput
+             name="title"
+             required
+             formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="fill" id="description">
+      <mat-label>Position description</mat-label>
+      <textarea matInput name="description" formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill" id="numberOfPositions">
+      <mat-label>Available positions</mat-label>
+      <input matInput
+             type="number"
+             name="numberOfPositions"
+             required
+             formControlName="numberOfPositions">
+    </mat-form-field>
+    <mat-form-field appearance="fill" id="email">
+      <mat-label>Email</mat-label>
+      <input matInput
+             name="email"
+             required
+             formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="fill" id="url">
+      <mat-label>Url</mat-label>
+      <input matInput
+             name="url"
+             required
+             formControlName="url">
+    </mat-form-field>
+    <section>
+      <button [disabled]="registerForm.invalid" mat-raised-button color="primary" (click)="save()" class="save-button">
+        Save
+      </button>
+    </section>
+  </form>
+</mat-card-content>

@@ -27,6 +27,7 @@
     "amqplib": "^0.5.6",
     "axios": "latest",
     "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
     "jwt-decode": "^3.1.2",
     "rxjs": "~6.5.4",
     "stream-chat": "latest",

@@ -1,29 +1,41 @@
+.container {
+  margin-top: 16px;
+  width: 80%;
+  min-width: 500px;
+}
+
+.title {
+  text-align: center;
+}
+
 .content {
   padding-top: 16px;
   padding-bottom: 16px;
   height: 50rem;
-  min-width: 80rem;
-  overflow-y: auto;
+  /*min-width: 80rem;*/
   display: flex;
   flex-flow: column;
 }
 
-.tile1 {
-  left: 16px;
+.add-button {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  right: 30px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.tile2 {
-  right: 5px;
+.plus {
+  color: #3f51b5;
+  transition: ease 150ms;
 }
 
-.description {
-  white-space: pre-line;
-}
-
-.btm {
-  margin-top: 16px;
-}
-
-.container {
-  margin-top: 16px;
+.plus:hover {
+  font-size: 4rem;
 }

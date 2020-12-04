@@ -1,5 +1,5 @@
 <div class="container">
-  <button mat-raised-button color="primary" (click)="add()">Add position</button>
+  <h1 class="title">Your open positions:</h1>
   <div class="content" fxLayoutGap="16px grid">
     <div id="{{position.id}}" *ngFor="let position of positionList">
       <app-portion [position]="position"
@@ -8,4 +8,8 @@
       </app-portion>
     </div>
   </div>
+</div>
+
+<div class="add-button" (click)="add()">
+  <i class="fa fa-plus-circle fa-4x plus"></i>
 </div>

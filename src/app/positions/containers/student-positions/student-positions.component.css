@@ -1,23 +1,18 @@
+.container {
+  margin-top: 16px;
+  width: 80%;
+  min-width: 500px;
+}
+
+.title {
+  text-align: center;
+}
+
 .content {
   padding-top: 16px;
   padding-bottom: 16px;
-  height: 55rem;
-  min-width: 80rem;
-  overflow-y: auto;
+  height: 50rem;
   display: flex;
   flex-flow: column;
 }
 
-.tile1 {
-  position: absolute;
-  left: 16px;
-}
-
-.tile2 {
-  position: absolute;
-  right: 5px;
-}
-
-.description {
-  white-space: pre-line;
-}

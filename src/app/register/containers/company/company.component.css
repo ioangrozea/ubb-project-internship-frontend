@@ -10,7 +10,6 @@
   text-align: center;
 }
 
-.buttons{
-  display: flex;
-  justify-content: space-between;
+.register-button {
+  float: right;
 }
