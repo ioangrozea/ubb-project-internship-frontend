@@ -1,9 +1,11 @@
-<mat-drawer-container>
-  <mat-drawer-content>
+<div class="content" role="main">
+
+  <!-- Toolbar -->
+  <div class="header">
     <img id="carLogo" src="../assets/images/internship-logo.PNG" alt="image">
     <app-top-nav-bar></app-top-nav-bar>
-    <router-outlet></router-outlet>
+  </div>
 
-  </mat-drawer-content>
+  <router-outlet></router-outlet>
 
-</mat-drawer-container>
+</div>

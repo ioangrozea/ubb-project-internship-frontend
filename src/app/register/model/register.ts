@@ -3,8 +3,6 @@ export class StudentRegister {
   password: string;
   firstName: string;
   lastName: string;
-  birthdate: string;
-  description: string;
 }
 
 export class CompanyRegister {

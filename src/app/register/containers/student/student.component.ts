@@ -6,6 +6,7 @@ import {StudentRegister} from '../../model/register';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {DatePipe} from '@angular/common';
 import {RegisterApiService} from '../../http';
+import {passwordMatchValidator} from '../../../profile/validator/password-match.validator';
 
 @Component({
   selector: 'app-student-register',
@@ -15,16 +16,17 @@ import {RegisterApiService} from '../../http';
 })
 export class StudentComponent implements OnInit {
   studentRegister: StudentRegister = new StudentRegister();
-  hide = true;
+  hide1 = true;
+  hide2 = true;
+  minPw = 7;
 
   public registerForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    birthdate: new FormControl('', [Validators.required]),
-    username: new FormControl(''),
-    password: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
-  });
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(this.minPw)]),
+    password2: new FormControl('', [Validators.required]),
+  }, {validators: passwordMatchValidator});
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
@@ -36,11 +38,22 @@ export class StudentComponent implements OnInit {
     this.registerForm.valueChanges.subscribe((request) => {
       this.studentRegister.username = request.username;
       this.studentRegister.password = request.password;
-      this.studentRegister.birthdate = this.datePipe.transform(request.birthdate, "yyyy-MM-dd");
       this.studentRegister.firstName = request.firstName;
       this.studentRegister.lastName = request.lastName;
-      this.studentRegister.description = request.description;
     });
+  }
+
+  /* Shorthands for form controls (used from within template) */
+  get passwordConfirmation() { return this.registerForm.get('password'); }
+  get passwordConfirmation2() { return this.registerForm.get('password2'); }
+
+  /* Called on each input in either password field */
+  onPasswordInput() {
+    if (this.registerForm.hasError('passwordMismatch')) {
+      this.passwordConfirmation2.setErrors([{passwordMismatch: true}]);
+    } else {
+      this.passwordConfirmation2.setErrors(null);
+    }
   }
 
   onSubmit() {

@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../../../login/service';
 import {DatePipe} from '@angular/common';
 import {RegisterApiService} from '../../http';
+import {passwordMatchValidator} from '../../../profile/validator/password-match.validator';
 
 @Component({
   selector: 'app-company-register',
@@ -13,14 +14,17 @@ import {RegisterApiService} from '../../http';
 })
 export class CompanyComponent implements OnInit {
   companyRegister: CompanyRegister = new CompanyRegister();
-  hide = true;
+  hide1 = true;
+  hide2 = true;
+  minPw = 7;
 
   public registerForm = new FormGroup({
-    name: new FormControl(''),
-    username: new FormControl(''),
-    password: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
-  });
+    name: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(this.minPw)]),
+    password2: new FormControl('', [Validators.required]),
+  }, {validators: passwordMatchValidator});
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
@@ -35,6 +39,19 @@ export class CompanyComponent implements OnInit {
       this.companyRegister.name = request.name;
       this.companyRegister.description = request.description;
     });
+  }
+
+  /* Shorthands for form controls (used from within template) */
+  get passwordConfirmation() { return this.registerForm.get('password'); }
+  get passwordConfirmation2() { return this.registerForm.get('password2'); }
+
+  /* Called on each input in either password field */
+  onPasswordInput() {
+    if (this.registerForm.hasError('passwordMismatch')) {
+      this.passwordConfirmation2.setErrors([{passwordMismatch: true}]);
+    } else {
+      this.passwordConfirmation2.setErrors(null);
+    }
   }
 
   onSubmit() {

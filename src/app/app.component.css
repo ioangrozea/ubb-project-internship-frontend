@@ -1,9 +1,7 @@
 #carLogo {
-  height: 20%;
   width: 100%;
 }
 
-mat-drawer-container, mat-drawer-content {
-  height: 100%;
-  overflow: hidden;
+.header {
+  margin-bottom: 30px;
 }
