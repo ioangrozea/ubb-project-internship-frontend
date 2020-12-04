@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
       this.loginRequest.username = request.username;
       this.loginRequest.password = request.password;
       this.loginRequest.userType = request.userType;
-      console.log('userType:' + request.userType);
-      console.log('student:' + UserType.ROLE_STUDENT);
       if (request.userType === UserType[UserType.ROLE_STUDENT]) {
         this.userType = 'student';
       } else {

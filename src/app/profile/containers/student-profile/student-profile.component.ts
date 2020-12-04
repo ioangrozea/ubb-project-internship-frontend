@@ -6,6 +6,7 @@ import {passwordMatchValidator} from '../../validator/password-match.validator';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +32,7 @@ export class StudentProfileComponent implements OnInit{
 
   dialogData = new ConfirmDialogModel('Confirm Action', 'Delete your ptofile?');
 
-  constructor(private profileApiService: ProfileApiService, private dialog: MatDialog, private router: Router) {
+  constructor(private profileApiService: ProfileApiService, private dialog: MatDialog, private router: Router, private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -49,6 +50,7 @@ export class StudentProfileComponent implements OnInit{
         this.initialFirstName = this.student.firstName;
         this.initialLastName = this.student.lastName;
         this.initialUsername = this.student.username;
+        this.notificationService.createToastrSuccess('Profile details successfully loaded', 'SUCCESS');
       },
       error => console.log(JSON.stringify(error)));
   }
@@ -79,11 +81,13 @@ export class StudentProfileComponent implements OnInit{
         this.studentFormGroup.controls.username.setValue(result.username);
         this.initialFirstName = this.student.firstName;
         this.initialLastName = this.student.lastName;
+        this.notificationService.createToastrSuccess('Company details successfully updated', 'SUCCESS');
         if (usernameChanged) {
           console.log('username changed');
           localStorage.removeItem('token');
           localStorage.removeItem('accountType');
           localStorage.removeItem('userId');
+          this.notificationService.createToastrSuccess('New log in is required', 'INFO');
           this.router.navigate(['/login']);
         }
       },
@@ -99,6 +103,7 @@ export class StudentProfileComponent implements OnInit{
         localStorage.removeItem('token');
         localStorage.removeItem('accountType');
         localStorage.removeItem('userId');
+        this.notificationService.createToastrSuccess('Password successfully updated. Please log in again.', 'SUCCESS');
         this.router.navigate(['/login']);
       },
       error => console.log(JSON.stringify(error)));
@@ -120,6 +125,7 @@ export class StudentProfileComponent implements OnInit{
             localStorage.removeItem('token');
             localStorage.removeItem('accountType');
             localStorage.removeItem('userId');
+            this.notificationService.createToastrSuccess('Profile successfully deleted', 'SUCCESS');
             this.router.navigate(['/login']);
           },
           error => console.log(JSON.stringify(error)));;

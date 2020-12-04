@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {PositionService} from '../../service/position.service';
 import {Position} from '../../model/position';
 import {EditService} from '../../service/edit.service';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-add-position',
@@ -23,7 +24,8 @@ export class AddPositionComponent implements OnInit {
 
   constructor(private router: Router,
               private positionService: PositionService,
-              private editService: EditService) {
+              private editService: EditService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -46,6 +48,10 @@ export class AddPositionComponent implements OnInit {
   }
 
   public save() {
-    this.positionService.addPosition(this.position).subscribe(() => this.router.navigate(['positions/company']));
+    this.positionService.addPosition(this.position).subscribe(
+      () => {
+        this.router.navigate(['positions/company']);
+        this.notificationService.createToastrSuccess('New position was successfully created', 'SUCCESS');
+      });
   }
 }

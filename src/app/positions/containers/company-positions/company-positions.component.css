@@ -1,7 +1,7 @@
 .container {
   margin-top: 16px;
   width: 80%;
-  min-width: 500px;
+  min-width: 350px;
 }
 
 .title {
@@ -11,8 +11,6 @@
 .content {
   padding-top: 16px;
   padding-bottom: 16px;
-  height: 50rem;
-  /*min-width: 80rem;*/
   display: flex;
   flex-flow: column;
 }

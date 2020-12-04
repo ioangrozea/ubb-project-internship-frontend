@@ -7,6 +7,7 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {DatePipe} from '@angular/common';
 import {RegisterApiService} from '../../http';
 import {passwordMatchValidator} from '../../../profile/validator/password-match.validator';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-student-register',
@@ -31,7 +32,8 @@ export class StudentComponent implements OnInit {
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
               private datePipe: DatePipe,
-              private registerApiService: RegisterApiService) {
+              private registerApiService: RegisterApiService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -66,6 +68,10 @@ export class StudentComponent implements OnInit {
   }
 
   public register() {
-    this.registerApiService.addStudent(this.studentRegister).subscribe(() => this.router.navigate(['login']));
+    this.registerApiService.addStudent(this.studentRegister).subscribe(
+      () => {
+        this.notificationService.createToastrSuccess('User was successfully registered.', 'SUCCESS');
+        this.router.navigate(['login']);
+      });
   }
 }

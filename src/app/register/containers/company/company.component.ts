@@ -6,6 +6,7 @@ import {AuthenticationService} from '../../../login/service';
 import {DatePipe} from '@angular/common';
 import {RegisterApiService} from '../../http';
 import {passwordMatchValidator} from '../../../profile/validator/password-match.validator';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-company-register',
@@ -29,7 +30,8 @@ export class CompanyComponent implements OnInit {
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
               private datePipe: DatePipe,
-              private registerApiService: RegisterApiService) {
+              private registerApiService: RegisterApiService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -64,6 +66,10 @@ export class CompanyComponent implements OnInit {
   }
 
   public register() {
-    this.registerApiService.addCompany(this.companyRegister).subscribe(() => this.router.navigate(['login']));
+    this.registerApiService.addCompany(this.companyRegister).subscribe(
+      () => {
+      this.notificationService.createToastrSuccess('Company was successfully registered.', 'SUCCESS');
+      this.router.navigate(['login']);
+    });
   }
 }

@@ -3,6 +3,7 @@ import {Position} from '../../model/position';
 import {PositionService} from '../../service/position.service';
 import {AuthenticationService} from '../../../login/service';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-company-positions',
@@ -14,7 +15,8 @@ export class CompanyPositionsComponent implements OnInit {
 
   constructor(private positionService: PositionService,
               private authenticationService: AuthenticationService,
-              private router: Router) {
+              private router: Router,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {

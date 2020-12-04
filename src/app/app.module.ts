@@ -17,6 +17,9 @@ import * as fromGuards from './guard';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
+import {ToastrModule} from 'ngx-toastr';
+import {NotificationService} from './shared/service/NotificationService';
+import {ErrorInterceptor} from './interceptors/ErrorInterceptor';
 
 export const httpInterceptorProviders = [
   {
@@ -29,6 +32,11 @@ export const httpInterceptorProviders = [
     useClass: JwtInterceptor,
     multi: true
   },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+  }
 ];
 
 @NgModule({
@@ -47,11 +55,13 @@ export const httpInterceptorProviders = [
     SharedModule,
     NgbModule,
     MatCardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     ...fromGuards.guards,
     httpInterceptorProviders,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

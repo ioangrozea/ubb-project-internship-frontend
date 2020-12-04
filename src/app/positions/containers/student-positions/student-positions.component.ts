@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Position} from '../../model/position';
 import {PositionService} from '../../service/position.service';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-student-positions',
@@ -10,7 +11,7 @@ import {PositionService} from '../../service/position.service';
 export class StudentPositionsComponent implements OnInit {
   positionList: Array<Position>;
 
-  constructor(private positionService: PositionService) {
+  constructor(private positionService: PositionService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {

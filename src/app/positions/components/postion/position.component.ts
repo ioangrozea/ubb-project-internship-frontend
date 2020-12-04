@@ -3,6 +3,7 @@ import {Position} from '../../model/position';
 import {PositionService} from '../../service/position.service';
 import {Router} from '@angular/router';
 import {EditService} from '../../service/edit.service';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-portion',
@@ -18,11 +19,13 @@ export class PositionComponent {
 
   constructor(private positionService: PositionService,
               private router: Router,
-              private editService: EditService) {
+              private editService: EditService,
+              private notificationService: NotificationService) {
   }
 
   deletePosition() {
     this.positionService.deletePortion(this.position.id).subscribe(() => {
+      this.notificationService.createToastrSuccess('Position successfully deleted', 'SUCCESS');
       this.deleted.emit(this.position);
     });
   }

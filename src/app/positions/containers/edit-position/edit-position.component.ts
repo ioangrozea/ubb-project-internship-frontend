@@ -1,16 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {PositionService} from '../../service/position.service';
 import {Position} from '../../model/position';
 import {EditService} from '../../service/edit.service';
+import {NotificationService} from '../../../shared/service/NotificationService';
 
 @Component({
   selector: 'app-edit-position',
   templateUrl: './edit-position.component.html',
   styleUrls: ['./edit-position.component.css']
 })
-export class EditPositionComponent implements OnInit{
+export class EditPositionComponent implements OnInit {
   position: Position;
   hide = true;
 
@@ -24,7 +25,8 @@ export class EditPositionComponent implements OnInit{
 
   constructor(private router: Router,
               private positionService: PositionService,
-              private editService: EditService) {
+              private editService: EditService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -55,6 +57,10 @@ export class EditPositionComponent implements OnInit{
   }
 
   public save() {
-    this.positionService.editPosition(this.position).subscribe(() => this.router.navigate(['positions/company']));
+    this.positionService.editPosition(this.position).subscribe(
+      () => {
+        this.notificationService.createToastrSuccess('Position information successfully updated', 'SUCCESS');
+        this.router.navigate(['positions/company']);
+      });
   }
 }

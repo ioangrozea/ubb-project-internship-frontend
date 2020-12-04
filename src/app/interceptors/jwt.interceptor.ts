@@ -3,10 +3,11 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, throwError} from 'rxjs';
 import {AuthenticationService} from '../login/service';
 import {catchError} from 'rxjs/operators';
+import {NotificationService} from '../shared/service/NotificationService';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationApiService: AuthenticationService) {
+  constructor(private authenticationApiService: AuthenticationService, private notificationService: NotificationService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -18,14 +19,15 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-    return next.handle(request)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 403) {
-            this.authenticationApiService.logOut();
-          }
-          return throwError('token expired');
-        })
-      );
+    return next.handle(request);
+      // .pipe(
+      //   catchError((error: HttpErrorResponse) => {
+      //     if (error.status === 403) {
+      //       this.authenticationApiService.logOut();
+      //     }
+      //     this.notificationService.createToastrError('Your session expired. Please log in again.', 'ERROR');
+      //     return throwError('token expired');
+      //   })
+      // );
   }
 }
