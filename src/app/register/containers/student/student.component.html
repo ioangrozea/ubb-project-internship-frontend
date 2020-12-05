@@ -1,7 +1,7 @@
 <mat-card-content>
   <form [formGroup]="registerForm" class="container">
     <h2 class="title">Register as student</h2>
-    <mat-form-field appearance="fill" id="firstName">
+    <mat-form-field id="firstName">
       <mat-label>First name</mat-label>
       <input #firstName
              matInput
@@ -9,7 +9,7 @@
              required
              formControlName="firstName">
     </mat-form-field>
-    <mat-form-field appearance="fill" id="lastName">
+    <mat-form-field id="lastName">
       <mat-label>Last name</mat-label>
       <input #lastName
              matInput
@@ -17,7 +17,7 @@
              required
              formControlName="lastName">
     </mat-form-field>
-    <mat-form-field appearance="fill" id="username">
+    <mat-form-field id="username">
       <mat-label>Username</mat-label>
       <input #username
              matInput
@@ -26,7 +26,7 @@
              formControlName="username"
              placeholder="Ex. User">
     </mat-form-field>
-    <mat-form-field appearance="fill" id="password">
+    <mat-form-field id="password">
       <mat-label>Password</mat-label>
       <input #password matInput formControlName="password" type="password"
              (input)="onPasswordInput()" [type]="hide1 ? 'password' : 'text'">
@@ -38,7 +38,7 @@
       <mat-error *ngIf="passwordConfirmation.hasError('minlength')">Password must have at least {{minPw}}characters
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill" id="password2">
+    <mat-form-field id="password2">
       <mat-label>Confirm password</mat-label>
       <input #password2 matInput formControlName="password2" type="password"
              (input)="onPasswordInput()" [type]="hide2 ? 'password' : 'text'">

@@ -1,7 +1,7 @@
 export class Position {
   id: number;
   title: string;
-  numberOfPositions: string;
+  numberOfPositions: number;
   keywords: string;
   createdAt: Date;
   companyName: string;

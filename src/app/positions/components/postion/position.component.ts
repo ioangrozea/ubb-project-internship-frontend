@@ -34,4 +34,9 @@ export class PositionComponent {
     this.editService.setPosition(this.position);
     this.router.navigate(['positions/edit']);
   }
+
+  isOutOfPositions() {
+    console.log(this.position.numberOfPositions === 0);
+    return this.position.numberOfPositions === 0;
+  }
 }

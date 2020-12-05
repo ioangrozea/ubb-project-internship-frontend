@@ -3,21 +3,19 @@
   padding-bottom: 16px;
 }
 
-.tile1 {
-  position: absolute;
-  left: 16px;
-}
-
-.tile2 {
-  position: absolute;
-  right: 5px;
-}
-
 .description {
   white-space: pre-line;
 }
 
-.space-between{
+.space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+::ng-deep mat-card .mat-card-header-text {
+  margin: 0;
 }

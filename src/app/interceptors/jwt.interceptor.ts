@@ -20,14 +20,5 @@ export class JwtInterceptor implements HttpInterceptor {
       });
     }
     return next.handle(request);
-      // .pipe(
-      //   catchError((error: HttpErrorResponse) => {
-      //     if (error.status === 403) {
-      //       this.authenticationApiService.logOut();
-      //     }
-      //     this.notificationService.createToastrError('Your session expired. Please log in again.', 'ERROR');
-      //     return throwError('token expired');
-      //   })
-      // );
   }
 }
