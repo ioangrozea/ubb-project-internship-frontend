@@ -1,18 +1,18 @@
 <mat-card-content>
   <form [formGroup]="registerForm" class="container">
     <h2 class="title">Edit position</h2>
-    <mat-form-field appearance="fill" id="title">
+    <mat-form-field id="title">
       <mat-label>Title</mat-label>
       <input matInput
              name="title"
              required
              formControlName="title">
     </mat-form-field>
-    <mat-form-field appearance="fill" id="description">
+    <mat-form-field id="description">
       <mat-label>Description</mat-label>
       <textarea matInput name="description" formControlName="description"></textarea>
     </mat-form-field>
-    <mat-form-field appearance="fill" id="numberOfPositions">
+    <mat-form-field id="numberOfPositions">
       <mat-label>Number of positions</mat-label>
       <input matInput
              type="number"
@@ -20,14 +20,14 @@
              required
              formControlName="numberOfPositions">
     </mat-form-field>
-    <mat-form-field appearance="fill" id="email">
+    <mat-form-field id="email">
       <mat-label>Email</mat-label>
       <input matInput
              name="email"
              required
              formControlName="email">
     </mat-form-field>
-    <mat-form-field appearance="fill" id="url">
+    <mat-form-field id="url">
       <mat-label>URL</mat-label>
       <input matInput
              name="url"

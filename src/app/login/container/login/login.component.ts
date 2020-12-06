@@ -40,14 +40,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    for (const control in this.logInForm.controls) {
-      if (this.logInForm.controls.hasOwnProperty(control)) {
-        this.logInForm.controls[control].markAsUntouched();
-        this.logInForm.controls[control].setErrors({});
-      }
-    }
-
     this.authenticationApiService.login(this.loginRequest);
+    this.logInForm.reset();
   }
 
   register() {

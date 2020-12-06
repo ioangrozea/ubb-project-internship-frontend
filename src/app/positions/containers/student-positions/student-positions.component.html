@@ -1,8 +1,6 @@
-<div class="container">
-  <h1 class="title">Open positions:</h1>
-  <div class="content" fxLayoutGap="16px grid">
-    <div id="{{position.id}}" *ngFor="let position of positionList">
-      <app-portion [position]="position"></app-portion>
-    </div>
+<h1 class="title">Open positions:</h1>
+<div class="content" fxLayoutGap="16px grid">
+  <div id="{{position.id}}" *ngFor="let position of positionList">
+    <app-portion [position]="position"></app-portion>
   </div>
 </div>
