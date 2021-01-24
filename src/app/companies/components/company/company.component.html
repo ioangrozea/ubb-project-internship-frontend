@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{company.name}}</mat-card-title>
+      <mat-card-subtitle>Status: {{companyStatus}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion class="mat-elevation-z0">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Details
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <span><p class="description">{{company.description}}</p></span>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <div *ngIf="!this.company.acceptedByAdmin" class="space-between">
+      <button mat-raised-button color="warn" (click)="acceptCompany()">Accept</button>
+    </div>
+  </mat-card>
+</div>

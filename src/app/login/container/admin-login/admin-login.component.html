@@ -1,0 +1,27 @@
+<form [formGroup]="logInForm" class="container">
+  <mat-form-field appearance="fill" id="username">
+    <mat-label>Username</mat-label>
+    <input #username
+           matInput
+           name="username"
+           required
+           formControlName="username"
+           placeholder="Ex. User">
+    <mat-hint align="end">{{username.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="fill" id="password">
+    <mat-label>Enter your password</mat-label>
+    <input #password
+           name="password"
+           required
+           formControlName="password"
+           matInput [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <section class="buttons">
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!logInForm.valid">Log in as {{userType}}</button>
+  </section>
+</form>

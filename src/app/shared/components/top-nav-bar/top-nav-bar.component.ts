@@ -24,6 +24,9 @@ export class TopNavBarComponent extends BaseComponent {
       case UserType.ROLE_COMPANY:
         this.router.navigate(['positions/company']);
         break;
+      case UserType.ROLE_ADMIN:
+        this.router.navigate(['positions/admin']);
+        break;
     }
   }
 
@@ -39,6 +42,13 @@ export class TopNavBarComponent extends BaseComponent {
       case UserType.ROLE_COMPANY:
         this.router.navigate(['profile/company']);
         break;
+      case UserType.ROLE_ADMIN:
+        this.router.navigate(['profile/admin']);
+        break;
     }
+  }
+
+  companies() {
+    this.router.navigate(['companies']);
   }
 }

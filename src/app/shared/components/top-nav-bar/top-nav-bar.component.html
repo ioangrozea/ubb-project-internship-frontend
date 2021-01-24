@@ -2,6 +2,7 @@
   <mat-toolbar-row class="w-50" style="min-width: 350px">
     <div class="container" *ngIf="authenticationService.getAuthToken()">
       <a class="item" mat-button (click)="positions()"> Positions </a>
+      <a class="item" mat-button (click)="companies()" *ngIf="authenticationService.getAccountType() === 'ROLE_ADMIN'"> Companies </a>
       <a class="item" mat-button (click)="profile()"> Profile </a>
       <a class="item" mat-button (click)="logOut()"> Log Out </a>
     </div>

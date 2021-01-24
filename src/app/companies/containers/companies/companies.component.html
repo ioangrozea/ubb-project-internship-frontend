@@ -1,0 +1,7 @@
+<h1 class="title">Registered companies:</h1>
+<div class="content" fxLayoutGap="16px grid">
+  <div id="{{company.id}}" *ngFor="let company of companyList">
+    <app-portion [company]="company"
+                 (updated)="updatedComponent($event)"></app-portion>
+  </div>
+</div>

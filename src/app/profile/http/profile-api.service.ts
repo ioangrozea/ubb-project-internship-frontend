@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Student} from '../model/student';
 import {Company} from '../model/company';
+import {Admin} from '../model/admin';
 
 
 @Injectable({providedIn: 'root'})
@@ -28,11 +29,23 @@ export class ProfileApiService {
     return this.http.get<Company>(`${environment.apiUrl}/company/${companyId}`);
   }
 
+  getAdminById(adminId: number): Observable<Company> {
+    return this.http.get<Company>(`${environment.apiUrl}/admin/${adminId}`);
+  }
+
   updateCompany(companyId: number, company: Company): Observable<Company> {
     return this.http.put<Company>(`${environment.apiUrl}/company/${companyId}`, company);
   }
 
+  updateAdmin(adminId: number, admin: Admin): Observable<Company> {
+    return this.http.put<Company>(`${environment.apiUrl}/admin/${adminId}`, admin);
+  }
+
   deleteCompany(companyId: number): Observable<any>{
     return this.http.delete<any>(`${environment.apiUrl}/company/${companyId}`);
+  }
+
+  deleteAdmin(adminId: number): Observable<any>{
+    return this.http.delete<any>(`${environment.apiUrl}/admin/${adminId}`);
   }
 }

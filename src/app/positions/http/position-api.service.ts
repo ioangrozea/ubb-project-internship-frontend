@@ -15,7 +15,7 @@ export class PositionApiService {
     return this.http.get<PositionDetails>(`${environment.apiUrl}/position/${positionId}`);
   }
 
-  getStudentPositions(): Observable<Array<Position>> {
+  getAllPositions(): Observable<Array<Position>> {
     return this.http.get<Array<Position>>(`${environment.apiUrl}/position`);
   }
 

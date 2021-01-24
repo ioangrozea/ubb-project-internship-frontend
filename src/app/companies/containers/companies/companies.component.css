@@ -1,0 +1,16 @@
+.container {
+  margin-top: 16px;
+  width: 80%;
+  min-width: 350px;
+}
+
+.title {
+  text-align: center;
+}
+
+.content {
+  padding: 16px 0;
+  height: 50rem;
+  display: flex;
+  flex-flow: column;
+}

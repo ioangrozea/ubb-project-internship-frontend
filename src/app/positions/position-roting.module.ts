@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AddPositionComponent, CompanyPositionsComponent, EditPositionComponent, StudentPositionsComponent} from './containers';
 import {AuthenticationGuard} from '../guard/authentication.guard';
+import {AdminPositionsComponent} from './containers/admin-positions/admin-positions.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,12 @@ const routes: Routes = [
   }, {
     path: 'company',
     component: CompanyPositionsComponent,
+    canActivate: [
+      AuthenticationGuard,
+    ],
+  }, {
+    path: 'admin',
+    component: AdminPositionsComponent,
     canActivate: [
       AuthenticationGuard,
     ],

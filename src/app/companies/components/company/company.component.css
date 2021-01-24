@@ -1,0 +1,21 @@
+.container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.description {
+  white-space: pre-line;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.opacity {
+  opacity: 0.5;
+}
+
+::ng-deep mat-card .mat-card-header-text {
+  margin: 0;
+}

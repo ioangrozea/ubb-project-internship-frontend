@@ -36,7 +36,6 @@ export class PositionComponent {
   }
 
   isOutOfPositions() {
-    console.log(this.position.numberOfPositions === 0);
     return this.position.numberOfPositions === 0;
   }
 }

@@ -1,0 +1,12 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-width: 350px;
+  width: 30%;
+}
+
+.full-width {
+  width: 100%;
+}
+

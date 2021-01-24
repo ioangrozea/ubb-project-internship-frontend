@@ -5,6 +5,7 @@ import {PositionService} from '../../service/position.service';
 import {Position} from '../../model/position';
 import {EditService} from '../../service/edit.service';
 import {NotificationService} from '../../../shared/service/NotificationService';
+import {UserType} from '../../../login/model/login-request';
 
 @Component({
   selector: 'app-edit-position',
@@ -60,7 +61,13 @@ export class EditPositionComponent implements OnInit {
     this.positionService.editPosition(this.position).subscribe(
       () => {
         this.notificationService.createToastrSuccess('Position information successfully updated', 'SUCCESS');
-        this.router.navigate(['positions/company']);
+        console.log('item:' + localStorage.getItem('accountType'));
+        console.log('enum:' + UserType.ROLE_ADMIN.toString());
+        if (localStorage.getItem('accountType') === 'ROLE_COMPANY') {
+          this.router.navigate(['positions/company']);
+        } else if (localStorage.getItem('accountType') === 'ROLE_ADMIN') {
+          this.router.navigate(['positions/admin']);
+        }
       });
   }
 }

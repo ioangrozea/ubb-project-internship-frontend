@@ -17,7 +17,7 @@ export class StudentPositionsComponent implements OnInit {
   ngOnInit() {
     // service call
     this.positionList = Array<Position>();
-    this.positionService.getStudentPositionList().subscribe(
+    this.positionService.getAllPositionList().subscribe(
       result => {
         this.positionList = this.positionList.concat(result);
       },

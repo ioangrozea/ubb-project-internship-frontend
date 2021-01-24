@@ -1,0 +1,38 @@
+.container {
+  margin-top: 16px;
+  width: 80%;
+  min-width: 350px;
+}
+
+.title {
+  text-align: center;
+}
+
+.content {
+  padding: 16px 0;
+  display: flex;
+  flex-flow: column;
+}
+
+.add-button {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  right: 30px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.plus {
+  color: #3f51b5;
+  transition: ease 150ms;
+}
+
+.plus:hover {
+  font-size: 4rem;
+}

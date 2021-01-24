@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 350px;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+
+.login_type{
+  max-width: 9.9rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+}

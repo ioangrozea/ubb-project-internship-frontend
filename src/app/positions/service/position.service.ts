@@ -18,8 +18,8 @@ export class PositionService {
     return this.positionApiService.getPositionDetailsById(id);
   }
 
-  getStudentPositionList(): Observable<Array<Position>> {
-    return this.positionApiService.getStudentPositions();
+  getAllPositionList(): Observable<Array<Position>> {
+    return this.positionApiService.getAllPositions();
   }
 
   getCompanyPositionList(companyId: number): Observable<Array<Position>> {

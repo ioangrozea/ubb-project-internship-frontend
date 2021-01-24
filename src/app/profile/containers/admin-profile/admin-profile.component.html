@@ -1,17 +1,9 @@
 <div class="container">
-  <div>
-    <h2>Hello {{initialCompanyName}}</h2>
-    <h4>Submitted profile details:</h4>
+  <div class="full-width">
+    <h2 class="text-center">Hello {{initialUsername}}</h2>
+    <h4 class="text-center">Submitted profile details:</h4>
     <mat-card-content>
-      <form [formGroup]="companyFormGroup">
-        <mat-form-field class="full-width">
-          <mat-label>Company name</mat-label>
-          <input matInput formControlName="companyName">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description"></textarea>
-        </mat-form-field>
+      <form [formGroup]="adminFormGroup">
         <mat-form-field class="full-width">
           <mat-label>Username</mat-label>
           <input matInput formControlName="username">
@@ -20,8 +12,8 @@
     </mat-card-content>
     <mat-grid-list cols="3">
       <mat-grid-tile [colspan]="1">
-        <mat-card-actions style="width: 82px">
-          <button mat-raised-button (click)="update()" color="primary" [disabled]="!companyFormGroup.valid">SAVE
+        <mat-card-actions style="width: 82px;">
+          <button mat-raised-button (click)="update()" color="primary" [disabled]="!adminFormGroup.valid">SAVE
           </button>
         </mat-card-actions>
       </mat-grid-tile>
@@ -37,7 +29,7 @@
 </div>
 <div class="container">
   <div class="full-width">
-    <h4>Update password</h4>
+    <h4 class="text-center">Update password</h4>
     <mat-card-content>
       <form [formGroup]="passwordFormGroup">
         <mat-form-field class="full-width">
