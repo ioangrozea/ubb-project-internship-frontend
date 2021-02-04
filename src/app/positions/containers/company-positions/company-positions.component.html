@@ -1,12 +1,12 @@
-  <h1 class="title">Your open positions:</h1>
-  <div class="content" fxLayoutGap="16px grid">
-    <div id="{{position.id}}" *ngFor="let position of positionList">
-      <app-portion [position]="position"
-                   [isEditable]="true"
-                   (deleted)="deleteComponent($event)">
-      </app-portion>
-    </div>
+<h1 class="title">Your open positions:</h1>
+<div class="content" fxLayoutGap="16px grid">
+  <div id="{{position.id}}" *ngFor="let position of positionList">
+    <app-portion [position]="position"
+                 [isEditable]="true"
+                 (deleted)="deleteComponent($event)">
+    </app-portion>
   </div>
+</div>
 
 <div class="add-button" (click)="add()" *ngIf="isAllowed">
   <i class="fa fa-plus-circle fa-4x plus"></i>
